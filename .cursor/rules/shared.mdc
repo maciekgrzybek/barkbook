@@ -1,0 +1,62 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+
+---
+description: Shared rules across all files
+globs: **/*
+---
+
+Prioritize error handling and edge cases
+ - Handle errors and edge cases at the beginning of functions.
+ - Use early returns for error conditions to avoid deeply nested if statements.
+ - Place the happy path last in the function for improved readability.
+ - Avoid unnecessary else statements; use if-return pattern instead.
+ - Use guard clauses to handle preconditions and invalid states early.
+ - Implement proper error logging and user-friendly error messages.
+ - Consider using custom error types or error factories for consistent error handling.
+
+TypeScript Conventions
+- Use interfaces over types when possible
+- Use strict type checking
+- Proper error handling with custom error types
+- Avoid any where possible
+
+Next.js Project Structure and Environment
+
+- Follow the folder project structure:
+  - app - pages 
+  - ui - purely ui components, without any domain logic
+  - features/* - folder with folders for specific domain feature, e.g. features/questions, features/stats
+  - core - for any core tooling
+- Use `dotenv` for environment variable management.
+
+
+  
+Database and Auth
+- Use the Supabase client for database interactions and real-time subscriptions.
+- Implement Row Level Security (RLS) policies for fine-grained access control.
+- Use Supabase Auth for user authentication and management.
+- Leverage Supabase Storage for file uploads and management.
+- Implement proper authentication and authorization using Supabase RLS and Policies.
+- Use supabase clients from the core/supabase folder - do not create a new instance
+
+Performance
+- Minimize use of client-side JavaScript; leverage Next.js's static generation.
+- Implement proper caching strategies
+- Use code splitting
+- Implement proper lazy loading
+- Prioritize Core Web Vitals (LCP, FID, CLS) in development.
+
+Testing
+- Implement end-to-end tests in Playwright for critical user flows.
+- Use unit and integration testing framework Vitest for functions and helpers.
+- Use end-to-end testing framework Playwright for critical user flows.
+- Use Supabase local development for testing database interactions.
+
+Documentation
+- Provide clear and concise comments for complex logic.
+- Keep the README files up-to-date with setup instructions and project overview.
+- Document Supabase schema, RLS policies, and Edge Functions when used.

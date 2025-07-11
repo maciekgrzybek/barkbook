@@ -1,0 +1,54 @@
+---
+description: 
+globs: **/*.tsx
+alwaysApply: false
+---
+---
+description: Shared rules across all frontend-related files
+globs: '**/*.tsx, **/*.jsx, **/*.astro, **/*.mdx'
+---
+
+Key Principles
+- Leverage Next.js's partial hydration and multi-framework support effectively.
+- Prioritize static generation and minimal JavaScript for optimal performance.
+- Organize files using Next.js's routing system.
+
+Component Development
+- Implement proper component composition and reusability.
+- Use component props for data passing.
+
+Routing and Pages
+- Use getStaticPaths() for generating static pages with dynamic routes.
+- Implement proper 404 handling with a 404.astro page.
+
+Styling
+- Prefer Tailwind CSS for styling components
+- Leverage global styles when necessary, importing them in layouts.
+
+Tailwind CSS Best Practices
+- Use Tailwind utility classes in components.
+- Leverage Tailwind's responsive design utilities (sm:, md:, lg:, etc.).
+- Utilize Tailwind's color palette and spacing scale for consistency.
+- Avoid using the @apply directive
+
+Performance Optimization
+- Minimize 'use client', 'useEffect', and 'setState'; favor React Server Components (RSC).
+- Wrap client components in Suspense with fallback.
+- Use dynamic loading for non-critical components.
+- Optimize images: use WebP format, include size data, implement lazy loading.
+- Optimize Web Vitals (LCP, CLS, FID).
+- Limit 'use client':
+  - Favor server components and Next.js SSR.
+  - Use only for Web API access in small components.
+  - Avoid for data fetching or state management.
+
+Accessibility
+- Ensure proper semantic HTML structure in all components.
+- Implement ARIA attributes where necessary.
+- Implement proper ARIA labels and roles for components.
+- Ensure keyboard navigation support for interactive elements.
+- Ensure color contrast ratios meet WCAG standards for readability.
+
+
+  
+  Follow Next.js docs for Data Fetching, Rendering, and Routing.
