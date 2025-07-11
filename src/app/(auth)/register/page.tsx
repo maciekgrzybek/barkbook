@@ -34,7 +34,7 @@ export default function RegisterPage() {
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
 
-  const { handleSubmit, control } = useForm<z.infer<typeof formSchema>>({
+  const { handleSubmit, register } = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       salonName: '',
@@ -102,7 +102,7 @@ export default function RegisterPage() {
               id="salon-name"
               placeholder="Paws & Bubbles"
               required
-              {...control('salonName')}
+              {...register('salonName')}
               disabled={isLoading}
             />
           </div>
@@ -113,7 +113,7 @@ export default function RegisterPage() {
               type="email"
               placeholder="m@example.com"
               required
-              {...control('email')}
+              {...register('email')}
               disabled={isLoading}
             />
           </div>
@@ -123,7 +123,7 @@ export default function RegisterPage() {
               id="password"
               type="password"
               required
-              {...control('password')}
+              {...register('password')}
               disabled={isLoading}
             />
           </div>

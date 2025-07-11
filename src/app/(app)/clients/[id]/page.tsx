@@ -25,7 +25,11 @@ import Image from 'next/image';
 import { useClients } from '@/contexts/client-context';
 import { Skeleton } from '@/components/ui/skeleton';
 
-export default function ClientDetailPage({ params }: { params: { id: string } }) {
+export default function ClientDetailPage({
+  params,
+}: {
+  params: { id: string };
+}) {
   const { getClientById, isLoading } = useClients();
   const { t } = useLanguage();
 
@@ -34,8 +38,8 @@ export default function ClientDetailPage({ params }: { params: { id: string } })
   if (isLoading) {
     return (
       <>
-        <PageHeader>
-            <Skeleton className="h-8 w-48" />
+        <PageHeader title={t('client.contact_info')}>
+          <Skeleton className="h-8 w-48" />
         </PageHeader>
         <div className="grid gap-6 md:grid-cols-2">
           <Card>
@@ -71,7 +75,7 @@ export default function ClientDetailPage({ params }: { params: { id: string } })
       </>
     );
   }
-  
+
   if (!client) {
     notFound();
   }
@@ -110,46 +114,46 @@ export default function ClientDetailPage({ params }: { params: { id: string } })
           </CardHeader>
           <CardContent>
             {client.dogs && client.dogs.length > 0 ? (
-                <Table>
+              <Table>
                 <TableHeader>
-                    <TableRow>
+                  <TableRow>
                     <TableHead>{t('dog.profile')}</TableHead>
                     <TableHead>{t('dog.breed')}</TableHead>
                     <TableHead>{t('dog.age')}</TableHead>
                     <TableHead>
-                        <span className="sr-only">Actions</span>
+                      <span className="sr-only">Actions</span>
                     </TableHead>
-                    </TableRow>
+                  </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {client.dogs.map((dog) => (
+                  {client.dogs.map((dog) => (
                     <TableRow key={dog.id}>
-                        <TableCell className="font-medium flex items-center gap-2">
+                      <TableCell className="font-medium flex items-center gap-2">
                         <Image
-                            src={dog.photoUrl}
-                            alt={dog.name}
-                            width={32}
-                            height={32}
-                            className="rounded-full object-cover"
-                            data-ai-hint="dog portrait"
+                          src={dog.photoUrl}
+                          alt={dog.name}
+                          width={32}
+                          height={32}
+                          className="rounded-full object-cover"
+                          data-ai-hint="dog portrait"
                         />
                         {dog.name}
-                        </TableCell>
-                        <TableCell>{dog.breed}</TableCell>
-                        <TableCell>{dog.age}</TableCell>
-                        <TableCell className="text-right">
+                      </TableCell>
+                      <TableCell>{dog.breed}</TableCell>
+                      <TableCell>{dog.age}</TableCell>
+                      <TableCell className="text-right">
                         <Button asChild variant="outline" size="sm">
-                            <Link href={`/dogs/${dog.id}`}>View</Link>
+                          <Link href={`/dogs/${dog.id}`}>View</Link>
                         </Button>
-                        </TableCell>
+                      </TableCell>
                     </TableRow>
-                    ))}
+                  ))}
                 </TableBody>
-                </Table>
+              </Table>
             ) : (
-                <div className="text-center text-muted-foreground py-8">
-                    No dogs added for this client yet.
-                </div>
+              <div className="text-center text-muted-foreground py-8">
+                No dogs added for this client yet.
+              </div>
             )}
           </CardContent>
         </Card>
