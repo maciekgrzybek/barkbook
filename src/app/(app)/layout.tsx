@@ -8,8 +8,10 @@ import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Menu, Loader2 } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import React, { useEffect } from 'react';
-import { ClientProvider } from '@/contexts/client-context';
-import { useAuth } from '@/contexts/auth-context';
+import { AuthProvider, useAuth } from '@/features/auth/contexts/auth-context';
+
+import { ClientProvider } from '@/features/clients/contexts/client-context';
+import { Toaster } from '@/components/ui/toaster';
 import { useRouter } from 'next/navigation';
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {

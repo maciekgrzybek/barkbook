@@ -1,32 +1,34 @@
+import i18n from 'i18next';
+import { initReactI18next } from 'react-i18next';
+
 export const translations = {
   en: {
     // General
-    'appName': 'SalonMinder',
-    'save': 'Save',
-    'add': 'Add',
-    'edit': 'Edit',
+    appName: 'SalonMinder',
+    save: 'Save',
+    add: 'Add',
+    edit: 'Edit',
 
     // Navigation
-    'dashboard': 'Dashboard',
-    'clients': 'Clients',
-    'calendar': 'Calendar',
-    'settings': 'Settings',
-    'logout': 'Log Out',
-    'marketing': 'Marketing',
-    
+    dashboard: 'Dashboard',
+    clients: 'Clients',
+    calendar: 'Calendar',
+    settings: 'Settings',
+    logout: 'Log Out',
+
     // Auth
     'login.title': 'Welcome back!',
     'login.subtitle': 'Sign in to manage your salon',
     'login.button': 'Sign In',
-    'login.no_account': 'Don\'t have an account?',
+    'login.no_account': "Don't have an account?",
     'login.register': 'Register',
     'register.title': 'Create your account',
     'register.subtitle': 'Get started with SalonMinder',
     'register.button': 'Create Account',
     'register.has_account': 'Already have an account?',
     'register.login': 'Log In',
-    'email': 'Email',
-    'password': 'Password',
+    email: 'Email',
+    password: 'Password',
     'salon.name': 'Salon Name',
 
     // Dashboard
@@ -46,7 +48,7 @@ export const translations = {
     'clients.name': 'Name',
     'clients.phone': 'Phone',
     'clients.dogs': 'Dogs',
-    
+
     // Client Details
     'client.details': 'Client Details',
     'client.contact_info': 'Contact Information',
@@ -67,43 +69,30 @@ export const translations = {
     // Calendar
     'calendar.title': 'Calendar',
     'calendar.connect': 'Connect Google Calendar',
-    'calendar.description': 'Sync your appointments from Google Calendar to see them here.',
+    'calendar.description':
+      'Sync your appointments from Google Calendar to see them here.',
 
     // Settings
     'settings.title': 'Settings',
     'settings.language': 'Language',
     'settings.notifications': 'Notifications',
     'settings.notifications.enable': 'Enable Push Notifications',
-    'settings.notifications.description': 'Receive reminders for upcoming appointments.',
-
-    // Marketing
-    'marketing.title': 'Marketing Assistant',
-    'marketing.generator_title': 'Social Media Post Generator',
-    'marketing.generator_description': 'Create engaging social media posts for your salon. Just provide a topic to get started.',
-    'marketing.topic_label': 'Post Topic',
-    'marketing.topic_placeholder': 'e.g., "special offer for new clients", "summer grooming tips"',
-    'marketing.generate_button': 'Generate Content',
-    'marketing.generating_post': 'Generating post...',
-    'marketing.generating_image': 'Generating image...',
-    'marketing.result_title': 'Generated Content',
-    'marketing.result_description': 'Here is your generated social media post and image. You can copy it and use it on your social media channels.',
-    'marketing.awaiting_generation': 'Your generated content will appear here.',
-
+    'settings.notifications.description':
+      'Receive reminders for upcoming appointments.',
   },
   pl: {
     // General
-    'appName': 'SalonMinder',
-    'save': 'Zapisz',
-    'add': 'Dodaj',
-    'edit': 'Edytuj',
+    appName: 'SalonMinder',
+    save: 'Zapisz',
+    add: 'Dodaj',
+    edit: 'Edytuj',
 
     // Navigation
-    'dashboard': 'Panel',
-    'clients': 'Klienci',
-    'calendar': 'Kalendarz',
-    'settings': 'Ustawienia',
-    'logout': 'Wyloguj się',
-    'marketing': 'Marketing',
+    dashboard: 'Panel',
+    clients: 'Klienci',
+    calendar: 'Kalendarz',
+    settings: 'Ustawienia',
+    logout: 'Wyloguj się',
 
     // Auth
     'login.title': 'Witaj z powrotem!',
@@ -116,8 +105,8 @@ export const translations = {
     'register.button': 'Utwórz konto',
     'register.has_account': 'Masz już konto?',
     'register.login': 'Zaloguj się',
-    'email': 'Email',
-    'password': 'Hasło',
+    email: 'Email',
+    password: 'Hasło',
     'salon.name': 'Nazwa salonu',
 
     // Dashboard
@@ -154,33 +143,40 @@ export const translations = {
     'dog.notes': 'Notatki',
     'dog.price': 'Cena',
     'dog.edit_profile': 'Edytuj profil',
-    
+
     // Calendar
     'calendar.title': 'Kalendarz',
     'calendar.connect': 'Połącz z Kalendarzem Google',
-    'calendar.description': 'Zsynchronizuj swoje wizyty z Kalendarza Google, aby zobaczyć je tutaj.',
+    'calendar.description':
+      'Zsynchronizuj swoje wizyty z Kalendarza Google, aby zobaczyć je tutaj.',
 
     // Settings
     'settings.title': 'Ustawienia',
     'settings.language': 'Język',
     'settings.notifications': 'Powiadomienia',
     'settings.notifications.enable': 'Włącz powiadomienia push',
-    'settings.notifications.description': 'Otrzymuj przypomnienia o nadchodzących wizytach.',
-
-    // Marketing
-    'marketing.title': 'Asystent Marketingu',
-    'marketing.generator_title': 'Generator Postów Społecznościowych',
-    'marketing.generator_description': 'Twórz angażujące posty na media społecznościowe dla swojego salonu. Wystarczy podać temat, aby rozpocząć.',
-    'marketing.topic_label': 'Temat Posta',
-    'marketing.topic_placeholder': 'np. "specjalna oferta dla nowych klientów", "letnie porady pielęgnacyjne"',
-    'marketing.generate_button': 'Wygeneruj Treść',
-    'marketing.generating_post': 'Generowanie posta...',
-    'marketing.generating_image': 'Generowanie obrazu...',
-    'marketing.result_title': 'Wygenerowana Treść',
-    'marketing.result_description': 'Oto wygenerowany post i obraz. Możesz go skopiować i użyć na swoich kanałach społecznościowych.',
-    'marketing.awaiting_generation': 'Twoja wygenerowana treść pojawi się tutaj.',
-  }
+    'settings.notifications.description':
+      'Otrzymuj przypomnienia o nadchodzących wizytach.',
+  },
 };
+
+i18n.use(initReactI18next).init({
+  resources: {
+    en: {
+      translation: translations.en,
+    },
+    pl: {
+      translation: translations.pl,
+    },
+  },
+  lng: 'en', // Język domyślny
+  fallbackLng: 'en',
+  interpolation: {
+    escapeValue: false,
+  },
+});
+
+export default i18n;
 
 export type Language = 'en' | 'pl';
 export type TranslationKey = keyof typeof translations.en;

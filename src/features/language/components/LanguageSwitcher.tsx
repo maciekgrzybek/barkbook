@@ -1,6 +1,6 @@
 'use client';
 
-import { useLanguage } from '@/contexts/language-context';
+import { useLanguage } from '@/features/language/contexts/language-context';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 

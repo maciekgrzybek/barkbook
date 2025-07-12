@@ -12,8 +12,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { useLanguage } from '@/contexts/language-context';
-import { useAuth } from '@/contexts/auth-context';
+import { useLanguage } from '@/features/language/contexts/language-context';
+import { useAuth } from '@/features/auth/contexts/auth-context';
 import { useToast } from '@/hooks/use-toast';
 import { createClient } from '@/core/supabase/client';
 

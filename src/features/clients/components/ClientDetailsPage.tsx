@@ -20,20 +20,16 @@ import {
 } from '@/components/ui/table';
 import { notFound } from 'next/navigation';
 import { PlusCircle, Mail, Phone, Dog } from 'lucide-react';
-import { useLanguage } from '@/contexts/language-context';
+import { useLanguage } from '@/features/language/contexts/language-context';
 import Image from 'next/image';
-import { useClients } from '@/contexts/client-context';
+import { useClients } from '@/features/clients/contexts/client-context';
 import { Skeleton } from '@/components/ui/skeleton';
 
-export default function ClientDetailPage({
-  params,
-}: {
-  params: { id: string };
-}) {
+export function ClientDetailPage({ clientId }: { clientId: string }) {
   const { getClientById, isLoading } = useClients();
   const { t } = useLanguage();
 
-  const client = getClientById(params.id);
+  const client = getClientById(clientId);
 
   if (isLoading) {
     return (
@@ -143,7 +139,9 @@ export default function ClientDetailPage({
                       <TableCell>{dog.age}</TableCell>
                       <TableCell className="text-right">
                         <Button asChild variant="outline" size="sm">
-                          <Link href={`/dogs/${dog.id}`}>View</Link>
+                          <Link href={`/clients/${clientId}/dogs/${dog.id}`}>
+                            View
+                          </Link>
                         </Button>
                       </TableCell>
                     </TableRow>

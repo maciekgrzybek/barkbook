@@ -8,7 +8,7 @@ import React, {
   useEffect,
   useCallback,
 } from 'react';
-import { useAuth } from './auth-context';
+import { useAuth } from '@/features/auth/contexts/auth-context';
 import type { Client, Dog } from '@/lib/types';
 import { createClient } from '@/core/supabase/client';
 

@@ -1,5 +1,7 @@
 import { PawPrint } from 'lucide-react';
-import { useLanguage } from '@/contexts/language-context';
+import { useLanguage } from '@/features/language/contexts/language-context';
+import { cn } from '@/lib/utils';
+import Link from 'next/link';
 
 export function Logo() {
   const { t } = useLanguage();

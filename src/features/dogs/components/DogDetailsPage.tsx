@@ -2,12 +2,7 @@
 
 import { PageHeader } from '@/components/page-header';
 import { Button } from '@/components/ui/button';
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   Table,
   TableBody,
@@ -19,10 +14,10 @@ import {
 import { getDogById } from '@/lib/placeholder-data';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
-import { useLanguage } from '@/contexts/language-context';
+import { useLanguage } from '@/features/language/contexts/language-context';
 
-export default function DogProfilePage({ params }: { params: { id: string } }) {
-  const dog = getDogById(params.id);
+export function DogProfilePage({ dogId }: { dogId: string }) {
+  const dog = getDogById(dogId);
   const { t } = useLanguage();
 
   if (!dog) {
@@ -53,7 +48,10 @@ export default function DogProfilePage({ params }: { params: { id: string } }) {
                   {dog.breed}, {dog.age} {t('dog.age', { count: dog.age })}
                 </div>
                 <p className="text-sm mt-2">
-                  <strong className="font-medium">{t('dog.grooming_notes')}:</strong> {dog.groomingNotes}
+                  <strong className="font-medium">
+                    {t('dog.grooming_notes')}:
+                  </strong>{' '}
+                  {dog.groomingNotes}
                 </p>
               </div>
             </div>
@@ -78,10 +76,14 @@ export default function DogProfilePage({ params }: { params: { id: string } }) {
                 {dog.visits.length > 0 ? (
                   dog.visits.map((visit) => (
                     <TableRow key={visit.id}>
-                      <TableCell>{new Date(visit.date).toLocaleDateString()}</TableCell>
+                      <TableCell>
+                        {new Date(visit.date).toLocaleDateString()}
+                      </TableCell>
                       <TableCell>{visit.services.join(', ')}</TableCell>
                       <TableCell>{visit.notes}</TableCell>
-                      <TableCell className="text-right">${visit.price.toFixed(2)}</TableCell>
+                      <TableCell className="text-right">
+                        ${visit.price.toFixed(2)}
+                      </TableCell>
                     </TableRow>
                   ))
                 ) : (

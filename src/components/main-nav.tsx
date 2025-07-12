@@ -2,18 +2,15 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import {
-  LayoutDashboard,
-  Users,
-  Calendar,
-  Settings,
-  Sparkles,
-} from 'lucide-react';
+import { Users, Calendar, Settings, Dog, LayoutDashboard } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { useLanguage } from '@/contexts/language-context';
+import { useLanguage } from '@/features/language/contexts/language-context';
 import { Button } from '@/components/ui/button';
 
-export function MainNav({ className, ...props }: React.HTMLAttributes<HTMLElement>) {
+export function MainNav({
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLElement>) {
   const pathname = usePathname();
   const { t } = useLanguage();
 
@@ -35,12 +32,6 @@ export function MainNav({ className, ...props }: React.HTMLAttributes<HTMLElemen
       label: t('calendar'),
       icon: Calendar,
       active: pathname === '/calendar',
-    },
-    {
-      href: '/marketing',
-      label: t('marketing'),
-      icon: Sparkles,
-      active: pathname === '/marketing',
     },
     {
       href: '/settings',
