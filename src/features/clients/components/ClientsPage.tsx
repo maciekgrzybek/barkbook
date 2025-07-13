@@ -45,6 +45,7 @@ export function ClientsPage() {
       name: newClientName,
       email: newClientEmail,
       phone: newClientPhone,
+      photoUrl: '/placeholder-user.jpg',
     });
 
     setNewClientName('');
@@ -128,8 +129,8 @@ export function ClientsPage() {
                 <TableHead>{t('clients.name')}</TableHead>
                 <TableHead>{t('clients.phone')}</TableHead>
                 <TableHead>{t('email')}</TableHead>
-                <TableHead>{t('clients.dogs')}</TableHead>
-                <TableHead>
+                <TableHead>{t('clients.pets')}</TableHead>
+                <TableHead className="text-right">
                   <span className="sr-only">{t('edit')}</span>
                 </TableHead>
               </TableRow>
@@ -162,7 +163,7 @@ export function ClientsPage() {
                       </TableCell>
                       <TableCell>{client.phone}</TableCell>
                       <TableCell>{client.email}</TableCell>
-                      <TableCell>{client.dogs.length}</TableCell>
+                      <TableCell>{client.pets.length}</TableCell>
                       <TableCell className="text-right">
                         <Button asChild variant="outline" size="sm">
                           <Link href={`/clients/${client.id}`}>View</Link>

@@ -18,18 +18,19 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { notFound } from 'next/navigation';
-import { PlusCircle, Mail, Phone, Dog } from 'lucide-react';
+import { notFound, useParams } from 'next/navigation';
+import { PlusCircle, Mail, Phone, PawPrint } from 'lucide-react';
 import { useLanguage } from '@/features/language/contexts/language-context';
 import Image from 'next/image';
 import { useClients } from '@/features/clients/contexts/client-context';
 import { Skeleton } from '@/components/ui/skeleton';
 
-export function ClientDetailPage({ clientId }: { clientId: string }) {
+export function ClientDetailsPage() {
+  const { clientId } = useParams();
   const { getClientById, isLoading } = useClients();
   const { t } = useLanguage();
 
-  const client = getClientById(clientId);
+  const client = getClientById(clientId as string);
 
   if (isLoading) {
     return (
@@ -56,8 +57,8 @@ export function ClientDetailPage({ clientId }: { clientId: string }) {
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <Dog className="h-5 w-5 text-muted-foreground" />
-                {t('client.dogs_owned')}
+                <PawPrint className="h-5 w-5 text-muted-foreground" />
+                {t('client.pets_owned')}
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -100,46 +101,46 @@ export function ClientDetailPage({ clientId }: { clientId: string }) {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between">
             <CardTitle className="flex items-center gap-2">
-              <Dog className="h-5 w-5 text-muted-foreground" />
-              {t('client.dogs_owned')}
+              <PawPrint className="h-5 w-5 text-muted-foreground" />
+              {t('client.pets_owned')}
             </CardTitle>
             <Button size="sm">
               <PlusCircle className="mr-2 h-4 w-4" />
-              {t('client.add_dog')}
+              {t('client.add_pet')}
             </Button>
           </CardHeader>
           <CardContent>
-            {client.dogs && client.dogs.length > 0 ? (
+            {client.pets && client.pets.length > 0 ? (
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>{t('dog.profile')}</TableHead>
-                    <TableHead>{t('dog.breed')}</TableHead>
-                    <TableHead>{t('dog.age')}</TableHead>
+                    <TableHead>{t('pet.profile')}</TableHead>
+                    <TableHead>{t('pet.breed')}</TableHead>
+                    <TableHead>{t('pet.age')}</TableHead>
                     <TableHead>
                       <span className="sr-only">Actions</span>
                     </TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {client.dogs.map((dog) => (
-                    <TableRow key={dog.id}>
+                  {client.pets.map((pet) => (
+                    <TableRow key={pet.id}>
                       <TableCell className="font-medium flex items-center gap-2">
                         <Image
-                          src={dog.photoUrl}
-                          alt={dog.name}
+                          src={pet.photoUrl}
+                          alt={pet.name}
                           width={32}
                           height={32}
                           className="rounded-full object-cover"
-                          data-ai-hint="dog portrait"
+                          data-ai-hint="pet portrait"
                         />
-                        {dog.name}
+                        {pet.name}
                       </TableCell>
-                      <TableCell>{dog.breed}</TableCell>
-                      <TableCell>{dog.age}</TableCell>
+                      <TableCell>{pet.breed}</TableCell>
+                      <TableCell>{pet.age}</TableCell>
                       <TableCell className="text-right">
                         <Button asChild variant="outline" size="sm">
-                          <Link href={`/clients/${clientId}/dogs/${dog.id}`}>
+                          <Link href={`/clients/${clientId}/pets/${pet.id}`}>
                             View
                           </Link>
                         </Button>
@@ -150,7 +151,7 @@ export function ClientDetailPage({ clientId }: { clientId: string }) {
               </Table>
             ) : (
               <div className="text-center text-muted-foreground py-8">
-                No dogs added for this client yet.
+                No pets added for this client yet.
               </div>
             )}
           </CardContent>

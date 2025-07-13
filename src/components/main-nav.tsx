@@ -2,7 +2,13 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Users, Calendar, Settings, Dog, LayoutDashboard } from 'lucide-react';
+import {
+  Users,
+  Calendar,
+  Settings,
+  PawPrint,
+  LayoutDashboard,
+} from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useLanguage } from '@/features/language/contexts/language-context';
 import { Button } from '@/components/ui/button';

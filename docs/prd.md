@@ -17,19 +17,19 @@ Aplikacja BarkBook ma za zadanie rozwiązać te problemy, oferując proste i int
 
 ## 3. Wymagania funkcjonalne
 
-| ID    | Wymaganie                         | Opis                                                                                                                                                                                                              |
-| :---- | :-------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| FR-01 | Zarządzanie bazą klientów         | Użytkownik (groomer) może dodawać, przeglądać, edytować i usuwać dane klientów. Wymagane pola: imię, nazwisko, numer telefonu. Opcjonalne: e-mail, adres.                                                         |
-| FR-02 | Zarządzanie profilami psów        | Użytkownik może dodawać, przeglądać, edytować i usuwać profile psów. Każdy pies może być przypisany do jednego lub więcej klientów. Wymagane pola: imię, rasa, wiek, stan zdrowia, alergie, preferencje, notatki. |
-| FR-03 | Historia wizyt psa                | Każdy profil psa zawiera ustrukturyzowaną listę poprzednich wizyt, zawierającą datę i pole na notatki z wizyty.                                                                                                   |
-| FR-04 | Integracja kalendarza (`cal.com`) | Aplikacja osadza kalendarz `cal.com` za pomocą `iframe`. Groomer może ręcznie dodawać i przeglądać wizyty oraz blokować swoją dostępność.                                                                         |
-| FR-05 | Automatyczne powiadomienia SMS    | System automatycznie wysyła przypomnienia SMS do klientów przed wizytą. Czas wysłania (np. 24h przed) jest konfigurowalny przez groomera.                                                                         |
-| FR-06 | Wyszukiwanie                      | Aplikacja posiada prostą funkcję wyszukiwania, pozwalającą na znalezienie klienta lub psa po imieniu.                                                                                                             |
-| FR-07 | Dashboard (Ekran główny)          | Po uruchomieniu aplikacji wyświetlany jest dashboard z listą wizyt zaplanowanych na bieżący dzień.                                                                                                                |
-| FR-08 | Ustawienia salonu                 | Groomer może zapisać nazwę i dane swojego salonu, które mogą być wykorzystywane np. w treści powiadomień SMS.                                                                                                     |
-| FR-09 | Zgodność z RODO                   | Aplikacja umożliwia trwałe usunięcie danych klienta i jego psów oraz odnotowanie daty uzyskania zgody na przetwarzanie danych i komunikację.                                                                      |
-| FR-10 | Dostęp do aplikacji               | Aplikacja jest zabezpieczona przed nieautoryzowanym dostępem. Groomer musi się zalogować, aby uzyskać dostęp do danych.                                                                                           |
-| FR-11 | Tworzenie profilu salonu          | Po pierwszej rejestracji, użytkownik (groomer) musi utworzyć profil swojego salonu, podając jego nazwę. Jest to warunek konieczny do rozpoczęcia pracy z aplikacją.                                               |
+| ID    | Wymaganie                         | Opis                                                                                                                                                                                                                                                 |
+| :---- | :-------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| FR-01 | Zarządzanie bazą klientów         | Użytkownik (groomer) może dodawać, przeglądać, edytować i usuwać dane klientów. Wymagane pola: imię, nazwisko, numer telefonu. Opcjonalne: e-mail, adres.                                                                                            |
+| FR-02 | Zarządzanie profilami zwierzaków  | Użytkownik może dodawać, przeglądać, edytować i usuwać profile zwierzaków. Każdy zwierzak może być przypisany do jednego lub więcej klientów. Wymagane pola: imię, gatunek (np. pies, kot), rasa, wiek, stan zdrowia, alergie, preferencje, notatki. |
+| FR-03 | Historia wizyt zwierzaka          | Każdy profil zwierzaka zawiera ustrukturyzowaną listę poprzednich wizyt, zawierającą datę i pole na notatki z wizyty.                                                                                                                                |
+| FR-04 | Integracja kalendarza (`cal.com`) | Aplikacja osadza kalendarz `cal.com` za pomocą `iframe`. Groomer może ręcznie dodawać i przeglądać wizyty oraz blokować swoją dostępność.                                                                                                            |
+| FR-05 | Automatyczne powiadomienia SMS    | System automatycznie wysyła przypomnienia SMS do klientów przed wizytą. Czas wysłania (np. 24h przed) jest konfigurowalny przez groomera.                                                                                                            |
+| FR-06 | Wyszukiwanie                      | Aplikacja posiada prostą funkcję wyszukiwania, pozwalającą na znalezienie klienta lub zwierzaka po imieniu.                                                                                                                                          |
+| FR-07 | Dashboard (Ekran główny)          | Po uruchomieniu aplikacji wyświetlany jest dashboard z listą wizyt zaplanowanych na bieżący dzień.                                                                                                                                                   |
+| FR-08 | Ustawienia salonu                 | Groomer może zapisać nazwę i dane swojego salonu, które mogą być wykorzystywane np. w treści powiadomień SMS.                                                                                                                                        |
+| FR-09 | Zgodność z RODO                   | Aplikacja umożliwia trwałe usunięcie danych klienta i jego zwierzaków oraz odnotowanie daty uzyskania zgody na przetwarzanie danych i komunikację.                                                                                                   |
+| FR-10 | Dostęp do aplikacji               | Aplikacja jest zabezpieczona przed nieautoryzowanym dostępem. Groomer musi się zalogować, aby uzyskać dostęp do danych.                                                                                                                              |
+| FR-11 | Tworzenie profilu salonu          | Po pierwszej rejestracji, użytkownik (groomer) musi utworzyć profil swojego salonu, podając jego nazwę. Jest to warunek konieczny do rozpoczęcia pracy z aplikacją.                                                                                  |
 
 ## 4. Granice produktu
 
@@ -38,7 +38,7 @@ Następujące funkcjonalności celowo NIE wchodzą w zakres wersji MVP:
 - Logowanie dla klientów końcowych.
 - Możliwość samodzielnej rezerwacji wizyt przez klientów.
 - Wykorzystanie modeli językowych (LLM) do jakichkolwiek celów.
-- Przechowywanie zdjęć psów lub zdjęć z wizyt.
+- Przechowywanie zdjęć zwierzaków lub zdjęć z wizyt.
 - Możliwość definiowania cennika i listy usług.
 - Integracja z systemami płatności.
 - Zaawansowane raportowanie i analityka.
@@ -101,39 +101,39 @@ Następujące funkcjonalności celowo NIE wchodzą w zakres wersji MVP:
 - Kryteria akceptacji:
   1.  Na profilu klienta dostępna jest opcja "Usuń".
   2.  System wyświetla okno z prośbą o potwierdzenie operacji.
-  3.  Po potwierdzeniu, dane klienta oraz wszystkich przypisanych do niego psów są trwale usuwane z bazy danych.
+  3.  Po potwierdzeniu, dane klienta oraz wszystkich przypisanych do niego zwierzaków są trwale usuwane z bazy danych.
   4.  Usunięty klient nie jest już widoczny na liście klientów ani w wynikach wyszukiwania.
 
 ---
 
-### Zarządzanie Psami
+### Zarządzanie Zwierzakami
 
 - ID: US-006
-- Tytuł: Dodawanie i przypisywanie psa do klienta
-- Opis: Jako groomer, chcę dodać profil nowego psa i przypisać go do klienta. Chcę mieć też możliwość przypisania istniejącego już w systemie psa do innego klienta.
+- Tytuł: Dodawanie i przypisywanie zwierzaka do klienta
+- Opis: Jako groomer, chcę dodać profil nowego zwierzaka i przypisać go do klienta. Chcę mieć też możliwość przypisania istniejącego już w systemie zwierzaka do innego klienta.
 - Kryteria akceptacji:
 
-  1.  Z poziomu profilu klienta mogę zainicjować proces dodawania lub przypisywania psa.
-  2.  System pozwala wyszukać psa po imieniu, aby przypisać go do klienta.
-  3.  Jeśli pies nie istnieje w bazie, mogę utworzyć jego nowy profil.
-  4.  Formularz dodawania psa zawiera pola: imię, rasa, wiek, stan zdrowia, alergie, preferencje, ogólne notatki.
-  5.  Po przypisaniu, pies jest widoczny na profilu klienta.
+  1.  Z poziomu profilu klienta mogę zainicjować proces dodawania lub przypisywania zwierzaka.
+  2.  System pozwala wyszukać zwierzaka po imieniu, aby przypisać go do klienta.
+  3.  Jeśli zwierzak nie istnieje w bazie, mogę utworzyć jego nowy profil.
+  4.  Formularz dodawania zwierzaka zawiera pola: imię, gatunek, rasa, wiek, stan zdrowia, alergie, preferencje, ogólne notatki.
+  5.  Po przypisaniu, zwierzak jest widoczny na profilu klienta.
 
 - ID: US-007
-- Tytuł: Przeglądanie i edycja profilu psa
-- Opis: Jako groomer, chcę przeglądać i edytować informacje na temat psa, aby mieć aktualne dane.
+- Tytuł: Przeglądanie i edycja profilu zwierzaka
+- Opis: Jako groomer, chcę przeglądać i edytować informacje na temat zwierzaka, aby mieć aktualne dane.
 - Kryteria akceptacji:
 
-  1.  Mogę otworzyć profil psa z poziomu profilu dowolnego z jego właścicieli.
-  2.  Widzę wszystkie zapisane dane psa.
-  3.  Mogę edytować wszystkie pola w profilu psa.
+  1.  Mogę otworzyć profil zwierzaka z poziomu profilu dowolnego z jego właścicieli.
+  2.  Widzę wszystkie zapisane dane zwierzaka.
+  3.  Mogę edytować wszystkie pola w profilu zwierzaka.
   4.  Zmienione dane są poprawnie zapisywane.
 
 - ID: US-008
-- Tytuł: Przeglądanie historii wizyt psa
-- Opis: Jako groomer, chcę widzieć listę przeszłych wizyt psa, aby przypomnieć sobie, co było robione ostatnio.
+- Tytuł: Przeglądanie historii wizyt zwierzaka
+- Opis: Jako groomer, chcę widzieć listę przeszłych wizyt zwierzaka, aby przypomnieć sobie, co było robione ostatnio.
 - Kryteria akceptacji:
-  1.  Na profilu psa znajduje się sekcja "Historia wizyt".
+  1.  Na profilu zwierzaka znajduje się sekcja "Historia wizyt".
   2.  Wizyty są wyświetlane w porządku chronologicznym (od najnowszej).
   3.  Każdy wpis na liście zawiera datę wizyty i zapisane notatki.
 
@@ -143,21 +143,21 @@ Następujące funkcjonalności celowo NIE wchodzą w zakres wersji MVP:
 
 - ID: US-009
 - Tytuł: Dodawanie nowej wizyty w kalendarzu
-- Opis: Jako groomer, chcę dodać nową wizytę do kalendarza dla konkretnego klienta/psa.
+- Opis: Jako groomer, chcę dodać nową wizytę do kalendarza dla konkretnego klienta/zwierzaka.
 - Kryteria akceptacji:
 
   1.  Aplikacja wyświetla osadzony kalendarz z `cal.com`.
   2.  Mogę ręcznie utworzyć nowe wydarzenie w kalendarzu.
-  3.  W opisie wydarzenia w kalendarzu mogę wpisać imię klienta i psa, aby powiązać wizytę z danymi w BarkBook.
+  3.  W opisie wydarzenia w kalendarzu mogę wpisać imię klienta i zwierzaka, aby powiązać wizytę z danymi w BarkBook.
   4.  Po dodaniu wizyty w `cal.com` jest ona podstawą do wysłania powiadomienia SMS.
 
 - ID: US-010
 - Tytuł: Dodawanie notatki do historii po wizycie
-- Opis: Jako groomer, po zakończeniu wizyty, chcę dodać notatkę do historii wizyt psa.
+- Opis: Jako groomer, po zakończeniu wizyty, chcę dodać notatkę do historii wizyt zwierzaka.
 - Kryteria akceptacji:
-  1.  Na profilu psa mogę dodać nowy wpis do jego historii wizyt.
+  1.  Na profilu zwierzaka mogę dodać nowy wpis do jego historii wizyt.
   2.  Formularz wpisu pozwala na ustawienie daty wizyty i dodanie wieloliniowego opisu (notatek).
-  3.  Nowa notatka jest widoczna w historii wizyt psa.
+  3.  Nowa notatka jest widoczna w historii wizyt zwierzaka.
 
 ---
 
@@ -173,12 +173,12 @@ Następujące funkcjonalności celowo NIE wchodzą w zakres wersji MVP:
   3.  Każdy element listy pokazuje godzinę wizyty i jej tytuł (np. "Strzyżenie - Fafik, Jan Kowalski").
 
 - ID: US-012
-- Tytuł: Wyszukiwanie klienta lub psa
-- Opis: Jako groomer, chcę szybko znaleźć klienta lub psa w mojej bazie danych.
+- Tytuł: Wyszukiwanie klienta lub zwierzaka
+- Opis: Jako groomer, chcę szybko znaleźć klienta lub zwierzaka w mojej bazie danych.
 - Kryteria akceptacji:
   1.  W aplikacji znajduje się pole wyszukiwania.
-  2.  Po wpisaniu co najmniej 3 znaków imienia klienta lub psa, system wyświetla pasujące wyniki.
-  3.  Kliknięcie na wynik wyszukiwania przenosi mnie do profilu klienta lub psa.
+  2.  Po wpisaniu co najmniej 3 znaków imienia klienta lub zwierzaka, system wyświetla pasujące wyniki.
+  3.  Kliknięcie na wynik wyszukiwania przenosi mnie do profilu klienta lub zwierzaka.
 
 ---
 

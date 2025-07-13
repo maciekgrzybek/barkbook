@@ -6,21 +6,29 @@ export type Visit = {
   price: number;
 };
 
-export type Dog = {
+export type Pet = {
   id: string;
   name: string;
+  type: string;
   breed: string;
   age: number;
   photoUrl: string;
   groomingNotes: string;
   visits: Visit[];
-  clientId: string;
 };
 
 export type Client = {
   id: string;
   name: string;
-  phone: string;
   email: string;
-  dogs: Dog[];
+  phone: string;
+  photoUrl: string;
+  pets: Pet[];
+};
+
+export type UpcomingAppointment = {
+  time: string;
+  clientName: string;
+  petName: string;
+  services: string;
 };

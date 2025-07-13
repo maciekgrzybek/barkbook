@@ -37,7 +37,7 @@ export const translations = {
     'dashboard.total_clients': 'Total Clients',
     'dashboard.upcoming_appointments': 'Upcoming Appointments',
     'dashboard.time': 'Time',
-    'dashboard.dog': 'Dog',
+    'dashboard.pet': 'Pet',
     'dashboard.services': 'Services',
     'dashboard.view_all_appointments': 'View all appointments',
 
@@ -47,24 +47,25 @@ export const translations = {
     'clients.add_description': 'Enter the details for the new client.',
     'clients.name': 'Name',
     'clients.phone': 'Phone',
-    'clients.dogs': 'Dogs',
+    'clients.pets': 'Pets',
 
     // Client Details
     'client.details': 'Client Details',
     'client.contact_info': 'Contact Information',
-    'client.dogs_owned': 'Dogs',
-    'client.add_dog': 'Add Dog',
+    'client.pets_owned': 'Pets',
+    'client.add_pet': 'Add Pet',
 
-    // Dog Profile
-    'dog.profile': 'Dog Profile',
-    'dog.breed': 'Breed',
-    'dog.age': 'Age',
-    'dog.grooming_notes': 'Grooming Notes',
-    'dog.visit_history': 'Visit History',
-    'dog.date': 'Date',
-    'dog.notes': 'Notes',
-    'dog.price': 'Price',
-    'dog.edit_profile': 'Edit Profile',
+    // Pet Profile
+    'pet.profile': 'Pet Profile',
+    'pet.breed': 'Breed',
+    'pet.age': 'Age',
+    'pet.grooming_notes': 'Grooming Notes',
+    'pet.visit_history': 'Visit History',
+    'pet.date': 'Date',
+    'pet.notes': 'Notes',
+    'pet.price': 'Price',
+    'pet.edit_profile': 'Edit Profile',
+    'pet.type': 'Type',
 
     // Calendar
     'calendar.title': 'Calendar',
@@ -115,7 +116,7 @@ export const translations = {
     'dashboard.total_clients': 'Liczba klientów',
     'dashboard.upcoming_appointments': 'Nadchodzące wizyty',
     'dashboard.time': 'Godzina',
-    'dashboard.dog': 'Pies',
+    'dashboard.pet': 'Zwierzak',
     'dashboard.services': 'Usługi',
     'dashboard.view_all_appointments': 'Zobacz wszystkie wizyty',
 
@@ -125,24 +126,25 @@ export const translations = {
     'clients.add_description': 'Wprowadź dane nowego klienta.',
     'clients.name': 'Imię i nazwisko',
     'clients.phone': 'Telefon',
-    'clients.dogs': 'Psy',
+    'clients.pets': 'Zwierzęta',
 
     // Client Details
     'client.details': 'Szczegóły klienta',
     'client.contact_info': 'Informacje kontaktowe',
-    'client.dogs_owned': 'Psy',
-    'client.add_dog': 'Dodaj psa',
+    'client.pets_owned': 'Zwierzęta',
+    'client.add_pet': 'Dodaj zwierzaka',
 
-    // Dog Profile
-    'dog.profile': 'Profil psa',
-    'dog.breed': 'Rasa',
-    'dog.age': 'Wiek',
-    'dog.grooming_notes': 'Notatki pielęgnacyjne',
-    'dog.visit_history': 'Historia wizyt',
-    'dog.date': 'Data',
-    'dog.notes': 'Notatki',
-    'dog.price': 'Cena',
-    'dog.edit_profile': 'Edytuj profil',
+    // Pet Profile
+    'pet.profile': 'Profil zwierzaka',
+    'pet.breed': 'Rasa',
+    'pet.age': 'Wiek',
+    'pet.grooming_notes': 'Notatki pielęgnacyjne',
+    'pet.visit_history': 'Historia wizyt',
+    'pet.date': 'Data',
+    'pet.notes': 'Notatki',
+    'pet.price': 'Cena',
+    'pet.edit_profile': 'Edytuj profil',
+    'pet.type': 'Typ',
 
     // Calendar
     'calendar.title': 'Kalendarz',

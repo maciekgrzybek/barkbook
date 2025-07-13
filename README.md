@@ -1,16 +1,15 @@
 # SalonMinder
 
-SalonMinder is a simple mobile-first application designed for dog grooming salon owners in Poland to help them manage administrative tasks related to their business.
+BarkBook is a simple mobile-first application designed for pet grooming salon owners in Poland to help them manage administrative tasks related to their business.
 
 ## Features
 
-- **Salon Owner Authentication**: Secure registration and login for salon owners.
-- **Dashboard/Admin Panel**: An overview of the salon's appointments, clients, and dog records.
-- **Calendar Integration**: A mock integration with a third-party calendar to display appointments.
-- **Appointment Reminders**: UI for enabling push notifications for upcoming appointments.
-- **Dog Profile Management**: A complete profile for each dog, including photos, personal details, and grooming notes.
-- **Visit History**: A record of services for each dog.
-- **Multilingual Support**: Supports Polish and English, switchable in settings.
+- **Dashboard/Admin Panel**: An overview of the salon's appointments, clients, and pet records.
+- **Client Management**: A comprehensive database of clients with their contact information and assigned pets.
+- **Pet Profile Management**: A complete profile for each pet, including photos, personal details, and grooming notes.
+- **Visit History**: A record of services for each pet.
+- **Calendar Integration**: An embedded calendar from cal.com to manage appointments.
+- **SMS Notifications**: Automated reminders for clients about their upcoming appointments.
 
 ## Getting Started
 

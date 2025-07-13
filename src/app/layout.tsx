@@ -12,8 +12,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'SalonMinder',
-  description: 'Manage your dog grooming salon with ease.',
+  title: 'BarkBook',
+  description: 'Manage your pet grooming salon with ease.',
 };
 
 export default function RootLayout({

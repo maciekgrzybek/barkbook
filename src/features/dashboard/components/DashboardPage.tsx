@@ -16,10 +16,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import {
-  placeholderClients,
-  placeholderAppointments,
-} from '@/lib/placeholder-data';
+import { clients, upcomingAppointments } from '@/lib/placeholder-data';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { ArrowUpRight, Users, Calendar } from 'lucide-react';
@@ -41,7 +38,7 @@ export function DashboardPage() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">
-              {placeholderAppointments.length}
+              {upcomingAppointments.length}
             </div>
           </CardContent>
         </Card>
@@ -53,9 +50,7 @@ export function DashboardPage() {
             <Users className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">
-              {placeholderClients.length}
-            </div>
+            <div className="text-2xl font-bold">{clients.length}</div>
           </CardContent>
         </Card>
       </div>
@@ -69,17 +64,17 @@ export function DashboardPage() {
               <TableHeader>
                 <TableRow>
                   <TableHead>{t('dashboard.time')}</TableHead>
-                  <TableHead>{t('dashboard.dog')}</TableHead>
                   <TableHead>{t('clients.name')}</TableHead>
+                  <TableHead>{t('dashboard.pet')}</TableHead>
                   <TableHead>{t('dashboard.services')}</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {placeholderAppointments.map((appt) => (
-                  <TableRow key={appt.id}>
+                {upcomingAppointments.map((appt, index) => (
+                  <TableRow key={index}>
                     <TableCell className="font-medium">{appt.time}</TableCell>
-                    <TableCell>{appt.dogName}</TableCell>
                     <TableCell>{appt.clientName}</TableCell>
+                    <TableCell>{appt.petName}</TableCell>
                     <TableCell>{appt.services}</TableCell>
                   </TableRow>
                 ))}

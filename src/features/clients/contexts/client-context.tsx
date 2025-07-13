@@ -9,12 +9,12 @@ import React, {
   useCallback,
 } from 'react';
 import { useAuth } from '@/features/auth/contexts/auth-context';
-import type { Client, Dog } from '@/lib/types';
+import type { Client, Pet } from '@/lib/types';
 import { createClient } from '@/core/supabase/client';
 
 interface ClientContextType {
   clients: Client[];
-  addClient: (client: Omit<Client, 'id' | 'dogs'>) => Promise<void>;
+  addClient: (client: Omit<Client, 'id' | 'pets'>) => Promise<void>;
   getClientById: (id: string) => Client | undefined;
   isLoading: boolean;
 }
@@ -56,10 +56,10 @@ export const ClientProvider = ({ children }: { children: ReactNode }) => {
       const currentSalonId = salon.id;
       setSalonId(currentSalonId);
 
-      // 2. Fetch clients for that salon, with their dogs
+      // 2. Fetch clients for that salon, with their pets
       const { data: clientsData, error: clientsError } = await supabase
         .from('clients')
-        .select('*, dogs(*)')
+        .select('*, pets(*)')
         .eq('salon_id', currentSalonId);
 
       if (clientsError) {
@@ -79,7 +79,7 @@ export const ClientProvider = ({ children }: { children: ReactNode }) => {
     fetchSalonAndClients();
   }, [fetchSalonAndClients]);
 
-  const addClient = async (clientData: Omit<Client, 'id' | 'dogs'>) => {
+  const addClient = async (clientData: Omit<Client, 'id' | 'pets'>) => {
     if (!salonId) {
       console.error('No salon ID available.');
       return;
@@ -103,7 +103,7 @@ export const ClientProvider = ({ children }: { children: ReactNode }) => {
 
     // Add new client to local state to update UI immediately
     if (newClient) {
-      setClients((prevClients) => [{ ...newClient, dogs: [] }, ...prevClients]);
+      setClients((prevClients) => [{ ...newClient, pets: [] }, ...prevClients]);
     }
   };
 
