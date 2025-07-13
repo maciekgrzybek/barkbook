@@ -41,8 +41,10 @@ export const ClientProvider = ({ children }: { children: ReactNode }) => {
       const { data: salon, error: salonError } = await supabase
         .from('salons')
         .select('id')
-        .eq('owner_id', user.id)
+        .eq('user_id', user.id)
         .single();
+
+      console.log('salon', salon);
 
       if (salonError || !salon) {
         console.log('No salon found for this user.');

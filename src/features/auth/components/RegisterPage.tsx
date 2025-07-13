@@ -23,7 +23,6 @@ import { z } from 'zod';
 import { createClient } from '@/core/supabase/client';
 
 const formSchema = z.object({
-  salonName: z.string().min(2, 'Salon name must be at least 2 characters'),
   email: z.string().email('Invalid email address'),
   password: z.string().min(6, 'Password must be at least 6 characters'),
 });
@@ -37,7 +36,6 @@ export function RegisterPage() {
   const { handleSubmit, register } = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      salonName: '',
       email: '',
       password: '',
     },
@@ -57,28 +55,21 @@ export function RegisterPage() {
         throw error;
       }
 
-      if (data.user) {
-        const { error: salonError } = await supabase
-          .from('salons')
-          .insert([{ name: values.salonName, owner_id: data.user.id }]);
-
-        if (salonError) {
-          throw salonError;
-        }
+      // If email confirmation is disabled, a session is returned.
+      if (data.session) {
+        router.push('/create-salon');
+      } else {
+        toast({
+          title: 'Sukces!',
+          description:
+            'Rejestracja pomyślna! Sprawdź swoją skrzynkę e-mail, aby zweryfikować konto.',
+        });
       }
-
-      toast({
-        title: 'Success',
-        description:
-          'Registration successful! Please check your email to verify your account.',
-      });
-      router.push('/dashboard');
-      router.refresh();
     } catch (error: any) {
       toast({
         variant: 'destructive',
-        title: 'Registration Failed',
-        description: error.message || 'An unexpected error occurred.',
+        title: 'Rejestracja nie powiodła się',
+        description: error.message || 'Wystąpił nieoczekiwany błąd.',
       });
     } finally {
       setIsLoading(false);
@@ -96,16 +87,6 @@ export function RegisterPage() {
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4">
-          <div className="grid gap-2">
-            <Label htmlFor="salon-name">{t('salon.name')}</Label>
-            <Input
-              id="salon-name"
-              placeholder="Paws & Bubbles"
-              required
-              {...register('salonName')}
-              disabled={isLoading}
-            />
-          </div>
           <div className="grid gap-2">
             <Label htmlFor="email">{t('email')}</Label>
             <Input

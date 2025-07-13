@@ -46,13 +46,13 @@ to authenticated
 using (
   exists (
     select 1 from public.salons
-    where salons.id = clients.salon_id and salons.owner_id = auth.uid()
+    where salons.id = clients.salon_id and salons.user_id = auth.uid()
   )
 )
 with check (
   exists (
     select 1 from public.salons
-    where salons.id = clients.salon_id and salons.owner_id = auth.uid()
+    where salons.id = clients.salon_id and salons.user_id = auth.uid()
   )
 );
 
@@ -64,13 +64,13 @@ using (
   exists (
     select 1 from public.clients
     join public.salons on clients.salon_id = salons.id
-    where clients.id = dogs.client_id and salons.owner_id = auth.uid()
+    where clients.id = dogs.client_id and salons.user_id = auth.uid()
   )
 )
 with check (
   exists (
     select 1 from public.clients
     join public.salons on clients.salon_id = salons.id
-    where clients.id = dogs.client_id and salons.owner_id = auth.uid()
+    where clients.id = dogs.client_id and salons.user_id = auth.uid()
   )
 ); 

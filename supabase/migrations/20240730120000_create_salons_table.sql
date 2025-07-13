@@ -1,44 +1,39 @@
--- migration: 20240730120000_create_salons_table.sql
--- purpose: Create the salons table to store information about grooming salons.
--- author: Gemini
-
--- create the salons table
-create table if not exists public.salons (
-    id uuid not null primary key default gen_random_uuid(),
-    created_at timestamptz not null default now(),
-    name text not null,
-    owner_id uuid not null references auth.users(id) on delete cascade
+CREATE TABLE salons (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE,
+    name TEXT NOT NULL,
+    address TEXT,
+    nip TEXT,
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- add comments to the columns
-comment on column public.salons.id is 'Unique identifier for the salon.';
-comment on column public.salons.created_at is 'Timestamp of when the salon was created.';
-comment on column public.salons.name is 'Name of the grooming salon.';
-comment on column public.salons.owner_id is 'Foreign key to the user who owns the salon.';
+-- RLS Policies for salons table
+ALTER TABLE salons ENABLE ROW LEVEL SECURITY;
 
--- enable row level security for the salons table
-alter table public.salons enable row level security;
+CREATE POLICY "Allow individual user read access" ON salons
+FOR SELECT USING (auth.uid() = user_id);
 
--- create policy for authenticated users to insert their own salon
-create policy "Allow authenticated users to insert their own salon"
-on public.salons for insert
-to authenticated
-with check (auth.uid() = owner_id);
+CREATE POLICY "Allow individual user insert access" ON salons
+FOR INSERT WITH CHECK (auth.uid() = user_id);
 
--- create policy for users to view their own salon
-create policy "Allow authenticated users to view their own salon"
-on public.salons for select
-to authenticated
-using (auth.uid() = owner_id);
+CREATE POLICY "Allow individual user update access" ON salons
+FOR UPDATE USING (auth.uid() = user_id) WITH CHECK (auth.uid() = user_id);
 
--- create policy for users to update their own salon
-create policy "Allow authenticated users to update their own salon"
-on public.salons for update
-to authenticated
-using (auth.uid() = owner_id);
+CREATE POLICY "Allow individual user delete access" ON salons
+FOR DELETE USING (auth.uid() = user_id);
 
--- create policy for users to delete their own salon
-create policy "Allow authenticated users to delete their own salon"
-on public.salons for delete
-to authenticated
-using (auth.uid() = owner_id); 
+-- Function to update updated_at timestamp
+CREATE OR REPLACE FUNCTION update_updated_at_column()
+RETURNS TRIGGER AS $$
+BEGIN
+    NEW.updated_at = NOW();
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Trigger to update updated_at on salons table
+CREATE TRIGGER handle_updated_at
+BEFORE UPDATE ON salons
+FOR EACH ROW
+EXECUTE FUNCTION update_updated_at_column(); 

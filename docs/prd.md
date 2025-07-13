@@ -29,6 +29,7 @@ Aplikacja BarkBook ma za zadanie rozwiązać te problemy, oferując proste i int
 | FR-08 | Ustawienia salonu                 | Groomer może zapisać nazwę i dane swojego salonu, które mogą być wykorzystywane np. w treści powiadomień SMS.                                                                                                     |
 | FR-09 | Zgodność z RODO                   | Aplikacja umożliwia trwałe usunięcie danych klienta i jego psów oraz odnotowanie daty uzyskania zgody na przetwarzanie danych i komunikację.                                                                      |
 | FR-10 | Dostęp do aplikacji               | Aplikacja jest zabezpieczona przed nieautoryzowanym dostępem. Groomer musi się zalogować, aby uzyskać dostęp do danych.                                                                                           |
+| FR-11 | Tworzenie profilu salonu          | Po pierwszej rejestracji, użytkownik (groomer) musi utworzyć profil swojego salonu, podając jego nazwę. Jest to warunek konieczny do rozpoczęcia pracy z aplikacją.                                               |
 
 ## 4. Granice produktu
 
@@ -60,9 +61,21 @@ Następujące funkcjonalności celowo NIE wchodzą w zakres wersji MVP:
 
 ---
 
+- ID: US-002
+- Tytuł: Utworzenie profilu salonu przy pierwszej rejestracji
+- Opis: Jako nowy groomer, po utworzeniu konta, chcę od razu skonfigurować profil mojego salonu, aby móc w pełni korzystać z aplikacji.
+- Kryteria akceptacji:
+  1.  Po pomyślnym utworzeniu konta, jestem przekierowany do formularza tworzenia profilu salonu.
+  2.  Formularz wymaga podania nazwy salonu.
+  3.  Formularz pozwala na podanie dodatkowych danych, jak adres czy NIP.
+  4.  Nie mogę pominąć tego kroku i przejść do aplikacji bez utworzenia salonu.
+  5.  Po zapisaniu, dane salonu są powiązane z moim kontem.
+
+---
+
 ### Zarządzanie Klientami
 
-- ID: US-002
+- ID: US-003
 - Tytuł: Dodawanie nowego klienta
 - Opis: Jako groomer, chcę móc szybko dodać nowego klienta do systemu, podając jego podstawowe dane kontaktowe.
 - Kryteria akceptacji:
@@ -72,7 +85,7 @@ Następujące funkcjonalności celowo NIE wchodzą w zakres wersji MVP:
   3.  System waliduje poprawność formatu numeru telefonu.
   4.  Po zapisaniu, nowy klient jest widoczny na liście klientów.
 
-- ID: US-003
+- ID: US-004
 - Tytuł: Przeglądanie i edycja danych klienta
 - Opis: Jako groomer, chcę mieć możliwość przeglądania i aktualizowania danych istniejącego klienta.
 - Kryteria akceptacji:
@@ -82,7 +95,7 @@ Następujące funkcjonalności celowo NIE wchodzą w zakres wersji MVP:
   3.  Mogę edytować wszystkie pola danych klienta.
   4.  Zmienione dane są poprawnie zapisywane.
 
-- ID: US-004
+- ID: US-005
 - Tytuł: Usuwanie klienta (zgodność z RODO)
 - Opis: Jako groomer, na prośbę klienta, chcę mieć możliwość trwałego usunięcia jego danych z systemu.
 - Kryteria akceptacji:
@@ -95,7 +108,7 @@ Następujące funkcjonalności celowo NIE wchodzą w zakres wersji MVP:
 
 ### Zarządzanie Psami
 
-- ID: US-005
+- ID: US-006
 - Tytuł: Dodawanie i przypisywanie psa do klienta
 - Opis: Jako groomer, chcę dodać profil nowego psa i przypisać go do klienta. Chcę mieć też możliwość przypisania istniejącego już w systemie psa do innego klienta.
 - Kryteria akceptacji:
@@ -106,7 +119,7 @@ Następujące funkcjonalności celowo NIE wchodzą w zakres wersji MVP:
   4.  Formularz dodawania psa zawiera pola: imię, rasa, wiek, stan zdrowia, alergie, preferencje, ogólne notatki.
   5.  Po przypisaniu, pies jest widoczny na profilu klienta.
 
-- ID: US-006
+- ID: US-007
 - Tytuł: Przeglądanie i edycja profilu psa
 - Opis: Jako groomer, chcę przeglądać i edytować informacje na temat psa, aby mieć aktualne dane.
 - Kryteria akceptacji:
@@ -116,7 +129,7 @@ Następujące funkcjonalności celowo NIE wchodzą w zakres wersji MVP:
   3.  Mogę edytować wszystkie pola w profilu psa.
   4.  Zmienione dane są poprawnie zapisywane.
 
-- ID: US-007
+- ID: US-008
 - Tytuł: Przeglądanie historii wizyt psa
 - Opis: Jako groomer, chcę widzieć listę przeszłych wizyt psa, aby przypomnieć sobie, co było robione ostatnio.
 - Kryteria akceptacji:
@@ -128,7 +141,7 @@ Następujące funkcjonalności celowo NIE wchodzą w zakres wersji MVP:
 
 ### Zarządzanie Wizytami i Kalendarzem
 
-- ID: US-008
+- ID: US-009
 - Tytuł: Dodawanie nowej wizyty w kalendarzu
 - Opis: Jako groomer, chcę dodać nową wizytę do kalendarza dla konkretnego klienta/psa.
 - Kryteria akceptacji:
@@ -138,7 +151,7 @@ Następujące funkcjonalności celowo NIE wchodzą w zakres wersji MVP:
   3.  W opisie wydarzenia w kalendarzu mogę wpisać imię klienta i psa, aby powiązać wizytę z danymi w BarkBook.
   4.  Po dodaniu wizyty w `cal.com` jest ona podstawą do wysłania powiadomienia SMS.
 
-- ID: US-009
+- ID: US-010
 - Tytuł: Dodawanie notatki do historii po wizycie
 - Opis: Jako groomer, po zakończeniu wizyty, chcę dodać notatkę do historii wizyt psa.
 - Kryteria akceptacji:
@@ -150,7 +163,7 @@ Następujące funkcjonalności celowo NIE wchodzą w zakres wersji MVP:
 
 ### Dashboard i Wyszukiwanie
 
-- ID: US-010
+- ID: US-011
 - Tytuł: Przeglądanie wizyt na dany dzień
 - Opis: Jako groomer, chcę po otwarciu aplikacji od razu widzieć, jakie wizyty mam zaplanowane na dzisiaj.
 - Kryteria akceptacji:
@@ -159,7 +172,7 @@ Następujące funkcjonalności celowo NIE wchodzą w zakres wersji MVP:
   2.  Lista jest pobierana z kalendarza `cal.com`.
   3.  Każdy element listy pokazuje godzinę wizyty i jej tytuł (np. "Strzyżenie - Fafik, Jan Kowalski").
 
-- ID: US-011
+- ID: US-012
 - Tytuł: Wyszukiwanie klienta lub psa
 - Opis: Jako groomer, chcę szybko znaleźć klienta lub psa w mojej bazie danych.
 - Kryteria akceptacji:
@@ -171,7 +184,7 @@ Następujące funkcjonalności celowo NIE wchodzą w zakres wersji MVP:
 
 ### Ustawienia i RODO
 
-- ID: US-012
+- ID: US-013
 - Tytuł: Konfiguracja powiadomień SMS
 - Opis: Jako groomer, chcę móc ustawić, ile godzin przed wizytą ma być wysyłane automatyczne przypomnienie SMS.
 - Kryteria akceptacji:
@@ -180,7 +193,7 @@ Następujące funkcjonalności celowo NIE wchodzą w zakres wersji MVP:
   2.  System wykorzystuje tę wartość do planowania wysyłki powiadomień.
   3.  Domyślna wartość jest ustawiona na 24 godziny.
 
-- ID: US-013
+- ID: US-014
 - Tytuł: Konfiguracja danych salonu
 - Opis: Jako groomer, chcę móc wpisać nazwę mojego salonu, aby była ona używana w komunikacji z klientem.
 - Kryteria akceptacji:
@@ -188,7 +201,7 @@ Następujące funkcjonalności celowo NIE wchodzą w zakres wersji MVP:
   1.  W ustawieniach aplikacji znajduje się pole do wpisania nazwy salonu.
   2.  Zapisana nazwa jest automatycznie dołączana do treści wysyłanych wiadomości SMS (np. "Przypomnienie o wizycie w salonie [Nazwa Salonu]").
 
-- ID: US-014
+- ID: US-015
 - Tytuł: Odnotowanie zgody na przetwarzanie danych (RODO)
 - Opis: Jako groomer, dodając nowego klienta, chcę odnotować fakt i datę uzyskania od niego zgody na przetwarzanie danych osobowych i kontakt SMS.
 - Kryteria akceptacji:
