@@ -1,5 +1,5 @@
-import { ClientDetailPage } from '@/features/clients/components/ClientDetailsPage';
+import { ClientDetailsPage } from '@/features/clients/components/ClientDetailsPage';
 
-export default function Page({ params }: { params: { clientId: string } }) {
-  return <ClientDetailPage clientId={params.clientId} />;
+export default function Page() {
+  return <ClientDetailsPage />;
 }

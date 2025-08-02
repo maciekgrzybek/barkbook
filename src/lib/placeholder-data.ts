@@ -17,12 +17,7 @@ const pets: Pet[] = [
     type: 'Dog',
     breed: 'Mongrel',
     age: 5,
-    photoUrl: '/placeholder-dog.jpg',
-    groomingNotes: 'Loves belly rubs.',
-    visits: [
-      createVisit('v1', '2023-10-26', ['Wash', 'Cut'], 'Standard cut.', 100),
-      createVisit('v2', '2023-08-15', ['Wash'], 'Quick wash.', 50),
-    ],
+    notes: 'Loves belly rubs.',
   },
   {
     id: '2',
@@ -30,8 +25,7 @@ const pets: Pet[] = [
     type: 'Cat',
     breed: 'Persian',
     age: 2,
-    photoUrl: '/placeholder-cat.jpg',
-    groomingNotes: 'Prefers quiet environment.',
+    notes: 'Prefers quiet environment.',
     visits: [createVisit('v3', '2023-11-01', ['Nail Trim'], 'Just nails.', 30)],
   },
   {
@@ -40,8 +34,7 @@ const pets: Pet[] = [
     type: 'Dog',
     breed: 'Golden Retriever',
     age: 7,
-    photoUrl: '/placeholder-dog-2.jpg',
-    groomingNotes: 'Can be nervous around other pets.',
+    notes: 'Can be nervous around other pets.',
     visits: [
       createVisit(
         'v4',
@@ -58,8 +51,7 @@ const pets: Pet[] = [
     type: 'Rabbit',
     breed: 'Lionhead',
     age: 3,
-    photoUrl: '/placeholder-rabbit.jpg',
-    groomingNotes: 'Handle with care, very delicate.',
+    notes: 'Handle with care, very delicate.',
     visits: [],
   },
 ];
@@ -70,7 +62,6 @@ export const clients: Client[] = [
     name: 'Jan Kowalski',
     email: 'jan.kowalski@example.com',
     phone: '123-456-789',
-    photoUrl: '/placeholder-user.jpg',
     pets: [pets[0], pets[1]],
   },
   {
@@ -78,7 +69,6 @@ export const clients: Client[] = [
     name: 'Anna Nowak',
     email: 'anna.nowak@example.com',
     phone: '987-654-321',
-    photoUrl: '/placeholder-user-2.jpg',
     pets: [pets[2]],
   },
   {
@@ -86,7 +76,6 @@ export const clients: Client[] = [
     name: 'Piotr Wiśniewski',
     email: 'piotr.wisniewski@example.com',
     phone: '555-555-555',
-    photoUrl: '/placeholder-user-3.jpg',
     pets: [pets[3]],
   },
 ];

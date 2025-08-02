@@ -15,6 +15,7 @@ export const translations = {
     calendar: 'Calendar',
     settings: 'Settings',
     logout: 'Log Out',
+    pets: 'Pets',
 
     // Auth
     'login.title': 'Welcome back!',
@@ -48,15 +49,20 @@ export const translations = {
     'clients.name': 'Name',
     'clients.phone': 'Phone',
     'clients.pets': 'Pets',
+    'clients.surname': 'Surname',
+    cancel: 'Cancel',
 
     // Client Details
     'client.details': 'Client Details',
     'client.contact_info': 'Contact Information',
     'client.pets_owned': 'Pets',
     'client.add_pet': 'Add Pet',
+    'client.add_pet_description': 'Enter the details for the new pet.',
+    'client.select_owner': 'Select an owner',
 
     // Pet Profile
     'pet.profile': 'Pet Profile',
+    'pet.name': 'Name',
     'pet.breed': 'Breed',
     'pet.age': 'Age',
     'pet.grooming_notes': 'Grooming Notes',
@@ -66,6 +72,15 @@ export const translations = {
     'pet.price': 'Price',
     'pet.edit_profile': 'Edit Profile',
     'pet.type': 'Type',
+
+    // Pets
+    'pets.title': 'Pets',
+    'pets.search_placeholder': 'Search by pet name...',
+    'pets.name': 'Name',
+    'pets.breed': 'Breed',
+    'pets.age': 'Age',
+    'pets.owner': 'Owner',
+    view: 'View',
 
     // Calendar
     'calendar.title': 'Calendar',
@@ -127,15 +142,20 @@ export const translations = {
     'clients.name': 'Imię i nazwisko',
     'clients.phone': 'Telefon',
     'clients.pets': 'Zwierzęta',
+    'clients.surname': 'Nazwisko',
+    cancel: 'Anuluj',
 
     // Client Details
     'client.details': 'Szczegóły klienta',
     'client.contact_info': 'Informacje kontaktowe',
     'client.pets_owned': 'Zwierzęta',
     'client.add_pet': 'Dodaj zwierzaka',
+    'client.add_pet_description': 'Wprowadź dane nowego zwierzaka.',
+    'client.select_owner': 'Wybierz właściciela',
 
     // Pet Profile
     'pet.profile': 'Profil zwierzaka',
+    'pet.name': 'Imię',
     'pet.breed': 'Rasa',
     'pet.age': 'Wiek',
     'pet.grooming_notes': 'Notatki pielęgnacyjne',
@@ -145,6 +165,15 @@ export const translations = {
     'pet.price': 'Cena',
     'pet.edit_profile': 'Edytuj profil',
     'pet.type': 'Typ',
+
+    // Pets
+    'pets.title': 'Zwierzęta',
+    'pets.search_placeholder': 'Szukaj po imieniu zwierzaka...',
+    'pets.name': 'Imię',
+    'pets.breed': 'Rasa',
+    'pets.age': 'Wiek',
+    'pets.owner': 'Właściciel',
+    view: 'Zobacz',
 
     // Calendar
     'calendar.title': 'Kalendarz',

@@ -14,7 +14,13 @@ import { createClient } from '@/core/supabase/client';
 
 interface ClientContextType {
   clients: Client[];
-  addClient: (client: Omit<Client, 'id' | 'pets'>) => Promise<void>;
+  addClient: (
+    client: Omit<Client, 'id' | 'pets'>
+  ) => Promise<Client | undefined>;
+  addPet: (
+    pet: Pick<Pet, 'name' | 'breed' | 'age'>,
+    clientId: string
+  ) => Promise<void>;
   getClientById: (id: string) => Client | undefined;
   isLoading: boolean;
 }
@@ -79,7 +85,9 @@ export const ClientProvider = ({ children }: { children: ReactNode }) => {
     fetchSalonAndClients();
   }, [fetchSalonAndClients]);
 
-  const addClient = async (clientData: Omit<Client, 'id' | 'pets'>) => {
+  const addClient = async (
+    clientData: Omit<Client, 'id' | 'pets'>
+  ): Promise<Client | undefined> => {
     if (!salonId) {
       console.error('No salon ID available.');
       return;
@@ -103,8 +111,60 @@ export const ClientProvider = ({ children }: { children: ReactNode }) => {
 
     // Add new client to local state to update UI immediately
     if (newClient) {
-      setClients((prevClients) => [{ ...newClient, pets: [] }, ...prevClients]);
+      const clientWithEmptyPets = { ...newClient, pets: [] } as Client;
+      setClients((prevClients) => [clientWithEmptyPets, ...prevClients]);
+      return clientWithEmptyPets;
     }
+  };
+
+  const addPet = async (
+    petData: Pick<Pet, 'name' | 'breed' | 'age'>,
+    clientId: string
+  ) => {
+    if (!salonId) {
+      console.error('No salon ID available.');
+      return;
+    }
+
+    const { data: newPet, error: petError } = await supabase
+      .from('pets')
+      .insert([
+        {
+          ...petData,
+          salon_id: salonId,
+          age: Number(petData.age),
+        },
+      ])
+      .select()
+      .single();
+
+    if (petError) {
+      console.error('Error adding pet:', petError);
+      return;
+    }
+    if (!newPet) return;
+
+    const { error: linkError } = await supabase
+      .from('client_pets')
+      .insert({ client_id: clientId, pet_id: newPet.id });
+
+    if (linkError) {
+      console.error('Error linking pet to client:', linkError);
+      // Here you might want to delete the created pet
+      return;
+    }
+
+    const petWithDetails: Pet = {
+      ...newPet,
+    };
+
+    setClients((prevClients) =>
+      prevClients.map((client) =>
+        client.id === clientId
+          ? { ...client, pets: [...client.pets, petWithDetails] }
+          : client
+      )
+    );
   };
 
   const getClientById = (id: string) => {
@@ -113,7 +173,7 @@ export const ClientProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <ClientContext.Provider
-      value={{ clients, addClient, getClientById, isLoading }}
+      value={{ clients, addClient, getClientById, isLoading, addPet }}
     >
       {children}
     </ClientContext.Provider>

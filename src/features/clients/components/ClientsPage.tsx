@@ -33,22 +33,30 @@ export function ClientsPage() {
   const { t } = useLanguage();
   const { clients, addClient, isLoading } = useClients();
   const [newClientName, setNewClientName] = useState('');
+  const [newClientSurname, setNewClientSurname] = useState('');
   const [newClientEmail, setNewClientEmail] = useState('');
   const [newClientPhone, setNewClientPhone] = useState('');
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const handleAddClient = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!newClientName || !newClientEmail || !newClientPhone) return;
+    if (
+      !newClientName ||
+      !newClientSurname ||
+      !newClientEmail ||
+      !newClientPhone
+    )
+      return;
 
     addClient({
       name: newClientName,
+      surname: newClientSurname,
       email: newClientEmail,
-      phone: newClientPhone,
-      photoUrl: '/placeholder-user.jpg',
+      phone_number: newClientPhone,
     });
 
     setNewClientName('');
+    setNewClientSurname('');
     setNewClientEmail('');
     setNewClientPhone('');
     setIsDialogOpen(false);
@@ -82,7 +90,20 @@ export function ClientsPage() {
                     value={newClientName}
                     onChange={(e) => setNewClientName(e.target.value)}
                     className="col-span-3"
-                    placeholder="e.g. John Doe"
+                    placeholder="e.g. John"
+                    required
+                  />
+                </div>
+                <div className="grid grid-cols-4 items-center gap-4">
+                  <Label htmlFor="surname" className="text-right">
+                    Surname
+                  </Label>
+                  <Input
+                    id="surname"
+                    value={newClientSurname}
+                    onChange={(e) => setNewClientSurname(e.target.value)}
+                    className="col-span-3"
+                    placeholder="e.g. Doe"
                     required
                   />
                 </div>
@@ -159,9 +180,9 @@ export function ClientsPage() {
                 : clients.map((client) => (
                     <TableRow key={client.id}>
                       <TableCell className="font-medium">
-                        {client.name}
+                        {client.name} {client.surname}
                       </TableCell>
-                      <TableCell>{client.phone}</TableCell>
+                      <TableCell>{client.phone_number}</TableCell>
                       <TableCell>{client.email}</TableCell>
                       <TableCell>{client.pets.length}</TableCell>
                       <TableCell className="text-right">

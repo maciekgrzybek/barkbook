@@ -1,3 +1,8 @@
+import type { Database } from '@/core/db/database.types';
+
+export type PetRow = Database['public']['Tables']['pets']['Row'];
+export type ClientRow = Database['public']['Tables']['clients']['Row'];
+
 export type Visit = {
   id: string;
   date: string;
@@ -6,23 +11,9 @@ export type Visit = {
   price: number;
 };
 
-export type Pet = {
-  id: string;
-  name: string;
-  type: string;
-  breed: string;
-  age: number;
-  photoUrl: string;
-  groomingNotes: string;
-  visits: Visit[];
-};
+export type Pet = PetRow;
 
-export type Client = {
-  id: string;
-  name: string;
-  email: string;
-  phone: string;
-  photoUrl: string;
+export type Client = ClientRow & {
   pets: Pet[];
 };
 

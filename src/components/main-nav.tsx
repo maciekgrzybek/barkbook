@@ -40,6 +40,12 @@ export function MainNav({
       active: pathname === '/calendar',
     },
     {
+      href: '/pets',
+      label: t('pets'),
+      icon: PawPrint,
+      active: pathname.startsWith('/pets'),
+    },
+    {
       href: '/settings',
       label: t('settings'),
       icon: Settings,
