@@ -38,6 +38,7 @@ const clientSchema = z.object({
   surname: z.string().min(1, 'Surname is required'),
   email: z.string().email('Invalid email address'),
   phone_number: z.string().min(1, 'Phone number is required'),
+  address: z.string().optional(),
 });
 
 type PetFormData = z.infer<typeof petSchema>;
@@ -101,7 +102,10 @@ export function AddPetDialog({ isOpen, onClose }: AddPetDialogProps) {
   };
 
   const onClientSubmit = async (data: ClientFormData) => {
-    const newClient = await addClient(data);
+    const newClient = await addClient({
+      ...data,
+      address: data.address || null,
+    });
     if (newClient) {
       setShowNewOwnerForm(false);
       setPetValue('ownerId', newClient.id, { shouldValidate: true });

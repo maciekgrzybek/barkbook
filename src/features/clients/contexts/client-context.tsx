@@ -14,9 +14,20 @@ import { createClient } from '@/core/supabase/client';
 
 interface ClientContextType {
   clients: Client[];
+  allPets: Pet[];
   addClient: (
-    client: Omit<Client, 'id' | 'pets'>
+    client: Omit<
+      Client,
+      | 'id'
+      | 'pets'
+      | 'created_at'
+      | 'salon_id'
+      | 'has_gdpr_consent'
+      | 'gdpr_consent_date'
+    >
   ) => Promise<Client | undefined>;
+  deleteClient: (id: string) => Promise<void>;
+  deletePet: (petId: string, clientId?: string) => Promise<void>;
   addPet: (
     pet: Pick<Pet, 'name' | 'breed' | 'age'>,
     clientId: string
@@ -30,6 +41,7 @@ const ClientContext = createContext<ClientContextType | undefined>(undefined);
 export const ClientProvider = ({ children }: { children: ReactNode }) => {
   const { user } = useAuth();
   const [clients, setClients] = useState<Client[]>([]);
+  const [allPets, setAllPets] = useState<Pet[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [salonId, setSalonId] = useState<string | null>(null);
   const supabase = createClient();
@@ -73,9 +85,22 @@ export const ClientProvider = ({ children }: { children: ReactNode }) => {
       }
 
       setClients(clientsData as Client[]);
+
+      // 3. Fetch all pets for the salon (including orphaned ones)
+      const { data: allPetsData, error: petsError } = await supabase
+        .from('pets')
+        .select('*')
+        .eq('salon_id', currentSalonId);
+
+      if (petsError) {
+        throw petsError;
+      }
+
+      setAllPets(allPetsData as Pet[]);
     } catch (error) {
       console.error('Error fetching clients data:', error);
       setClients([]);
+      setAllPets([]);
     } finally {
       setIsLoading(false);
     }
@@ -86,7 +111,15 @@ export const ClientProvider = ({ children }: { children: ReactNode }) => {
   }, [fetchSalonAndClients]);
 
   const addClient = async (
-    clientData: Omit<Client, 'id' | 'pets'>
+    clientData: Omit<
+      Client,
+      | 'id'
+      | 'pets'
+      | 'created_at'
+      | 'salon_id'
+      | 'has_gdpr_consent'
+      | 'gdpr_consent_date'
+    >
   ): Promise<Client | undefined> => {
     if (!salonId) {
       console.error('No salon ID available.');
@@ -96,6 +129,8 @@ export const ClientProvider = ({ children }: { children: ReactNode }) => {
     const newClientData = {
       ...clientData,
       salon_id: salonId,
+      has_gdpr_consent: true,
+      gdpr_consent_date: new Date().toISOString(),
     };
 
     const { data: newClient, error } = await supabase
@@ -114,6 +149,46 @@ export const ClientProvider = ({ children }: { children: ReactNode }) => {
       const clientWithEmptyPets = { ...newClient, pets: [] } as Client;
       setClients((prevClients) => [clientWithEmptyPets, ...prevClients]);
       return clientWithEmptyPets;
+    }
+  };
+
+  const deleteClient = async (id: string) => {
+    const { error } = await supabase.from('clients').delete().eq('id', id);
+
+    if (error) {
+      console.error('Error deleting client:', error);
+      return;
+    }
+
+    setClients((prevClients) =>
+      prevClients.filter((client) => client.id !== id)
+    );
+  };
+
+  const deletePet = async (petId: string, clientId?: string) => {
+    const { error } = await supabase.from('pets').delete().eq('id', petId);
+
+    if (error) {
+      console.error('Error deleting pet:', error);
+      return;
+    }
+
+    // Update allPets state
+    setAllPets((prevPets) => prevPets.filter((pet) => pet.id !== petId));
+
+    // Update clients state only if clientId is provided
+    if (clientId) {
+      setClients((prevClients) =>
+        prevClients.map((client) => {
+          if (client.id === clientId) {
+            return {
+              ...client,
+              pets: client.pets.filter((pet) => pet.id !== petId),
+            };
+          }
+          return client;
+        })
+      );
     }
   };
 
@@ -158,6 +233,9 @@ export const ClientProvider = ({ children }: { children: ReactNode }) => {
       ...newPet,
     };
 
+    // Update allPets state
+    setAllPets((prevPets) => [...prevPets, petWithDetails]);
+
     setClients((prevClients) =>
       prevClients.map((client) =>
         client.id === clientId
@@ -173,7 +251,16 @@ export const ClientProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <ClientContext.Provider
-      value={{ clients, addClient, getClientById, isLoading, addPet }}
+      value={{
+        clients,
+        allPets,
+        addClient,
+        getClientById,
+        isLoading,
+        addPet,
+        deleteClient,
+        deletePet,
+      }}
     >
       {children}
     </ClientContext.Provider>

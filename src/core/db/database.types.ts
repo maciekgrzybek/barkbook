@@ -111,6 +111,54 @@ export type Database = {
           },
         ]
       }
+      pet_visits: {
+        Row: {
+          created_at: string
+          id: string
+          notes: string
+          pet_id: string | null
+          photos: Json | null
+          salon_id: string | null
+          updated_at: string
+          visit_date: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          notes: string
+          pet_id?: string | null
+          photos?: Json | null
+          salon_id?: string | null
+          updated_at?: string
+          visit_date: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          notes?: string
+          pet_id?: string | null
+          photos?: Json | null
+          salon_id?: string | null
+          updated_at?: string
+          visit_date?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "pet_visits_pet_id_fkey"
+            columns: ["pet_id"]
+            isOneToOne: false
+            referencedRelation: "pets"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "pet_visits_salon_id_fkey"
+            columns: ["salon_id"]
+            isOneToOne: false
+            referencedRelation: "salons"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       pets: {
         Row: {
           age: number | null

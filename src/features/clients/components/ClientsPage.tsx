@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import React, { useState } from 'react';
-import { PlusCircle } from 'lucide-react';
+import { MoreHorizontal, PlusCircle, Trash2 } from 'lucide-react';
 import { PageHeader } from '@/components/page-header';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -14,6 +14,24 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '@/components/ui/alert-dialog';
 import {
   Dialog,
   DialogContent,
@@ -31,7 +49,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 
 export function ClientsPage() {
   const { t } = useLanguage();
-  const { clients, addClient, isLoading } = useClients();
+  const { clients, addClient, isLoading, deleteClient } = useClients();
   const [newClientName, setNewClientName] = useState('');
   const [newClientSurname, setNewClientSurname] = useState('');
   const [newClientEmail, setNewClientEmail] = useState('');
@@ -53,6 +71,7 @@ export function ClientsPage() {
       surname: newClientSurname,
       email: newClientEmail,
       phone_number: newClientPhone,
+      address: '',
     });
 
     setNewClientName('');
@@ -60,6 +79,10 @@ export function ClientsPage() {
     setNewClientEmail('');
     setNewClientPhone('');
     setIsDialogOpen(false);
+  };
+
+  const handleDeleteClient = (id: string) => {
+    deleteClient(id);
   };
 
   return (
@@ -152,7 +175,7 @@ export function ClientsPage() {
                 <TableHead>{t('email')}</TableHead>
                 <TableHead>{t('clients.pets')}</TableHead>
                 <TableHead className="text-right">
-                  <span className="sr-only">{t('edit')}</span>
+                  <span className="sr-only">{t('actions')}</span>
                 </TableHead>
               </TableRow>
             </TableHeader>
@@ -180,15 +203,61 @@ export function ClientsPage() {
                 : clients.map((client) => (
                     <TableRow key={client.id}>
                       <TableCell className="font-medium">
-                        {client.name} {client.surname}
+                        <Link href={`/clients/${client.id}`}>
+                          {client.name} {client.surname}
+                        </Link>
                       </TableCell>
                       <TableCell>{client.phone_number}</TableCell>
                       <TableCell>{client.email}</TableCell>
                       <TableCell>{client.pets.length}</TableCell>
                       <TableCell className="text-right">
-                        <Button asChild variant="outline" size="sm">
-                          <Link href={`/clients/${client.id}`}>View</Link>
-                        </Button>
+                        <AlertDialog>
+                          <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                              <Button variant="ghost" className="h-8 w-8 p-0">
+                                <span className="sr-only">Open menu</span>
+                                <MoreHorizontal className="h-4 w-4" />
+                              </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent align="end">
+                              <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                              <DropdownMenuItem asChild>
+                                <Link href={`/clients/${client.id}`}>
+                                  View client
+                                </Link>
+                              </DropdownMenuItem>
+                              <AlertDialogTrigger asChild>
+                                <DropdownMenuItem
+                                  onSelect={(e) => e.preventDefault()}
+                                  className="text-red-600"
+                                >
+                                  <Trash2 className="mr-2 h-4 w-4" />
+                                  Delete client
+                                </DropdownMenuItem>
+                              </AlertDialogTrigger>
+                            </DropdownMenuContent>
+                          </DropdownMenu>
+                          <AlertDialogContent>
+                            <AlertDialogHeader>
+                              <AlertDialogTitle>
+                                {t('are_you_sure')}
+                              </AlertDialogTitle>
+                              <AlertDialogDescription>
+                                {t('client.delete_confirm_message')}
+                              </AlertDialogDescription>
+                            </AlertDialogHeader>
+                            <AlertDialogFooter>
+                              <AlertDialogCancel>
+                                {t('cancel')}
+                              </AlertDialogCancel>
+                              <AlertDialogAction
+                                onClick={() => handleDeleteClient(client.id)}
+                              >
+                                {t('delete')}
+                              </AlertDialogAction>
+                            </AlertDialogFooter>
+                          </AlertDialogContent>
+                        </AlertDialog>
                       </TableCell>
                     </TableRow>
                   ))}

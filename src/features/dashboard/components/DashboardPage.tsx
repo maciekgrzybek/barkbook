@@ -16,7 +16,9 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { clients, upcomingAppointments } from '@/lib/placeholder-data';
+// TODO: Replace with real data from Supabase
+const clients: any[] = [];
+const upcomingAppointments: any[] = [];
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { ArrowUpRight, Users, Calendar } from 'lucide-react';

@@ -51,6 +51,9 @@ export const translations = {
     'clients.pets': 'Pets',
     'clients.surname': 'Surname',
     cancel: 'Cancel',
+    'clients.delete': 'Delete Client',
+    'clients.delete_confirm_message':
+      'Are you sure you want to delete this client? This action cannot be undone.',
 
     // Client Details
     'client.details': 'Client Details',
@@ -59,6 +62,7 @@ export const translations = {
     'client.add_pet': 'Add Pet',
     'client.add_pet_description': 'Enter the details for the new pet.',
     'client.select_owner': 'Select an owner',
+    'client.delete': 'Delete Client',
 
     // Pet Profile
     'pet.profile': 'Pet Profile',
@@ -72,6 +76,52 @@ export const translations = {
     'pet.price': 'Price',
     'pet.edit_profile': 'Edit Profile',
     'pet.type': 'Type',
+    'pet.delete': 'Delete Pet',
+    'pet.delete_confirm_message':
+      'Are you sure you want to delete this pet? This action cannot be undone.',
+    'pet.no_owner': 'No owner',
+    'pet.add_visit': 'Add Visit',
+    'pet.add_visit_description': "Add a new visit entry to this pet's history.",
+    'pet.visit_date': 'Visit Date',
+    'pet.visit_notes': 'Visit Notes',
+    'pet.visit_notes_placeholder':
+      'Enter details about the visit (services performed, observations, etc.)',
+    'pet.notes_char_limit': 'Maximum 2000 characters',
+    'pet.adding_visit': 'Adding...',
+    'pet.no_visits': 'No visits recorded',
+    'pet.no_visits_description':
+      "Add the first visit to start tracking this pet's grooming history.",
+    'pet.visit_added_on': 'Added on',
+    'pet.delete_visit_confirm':
+      'Are you sure you want to delete this visit? This action cannot be undone.',
+    'pet.loading_visits': 'Loading visits...',
+
+    // Photos
+    'pet.add_photos': 'Add Photos',
+    'pet.add_photos_description': 'Add photos to document this visit.',
+    'pet.visit_created_successfully':
+      'Visit created successfully! You can now add photos.',
+    'pet.finish_adding_photos': 'Finish',
+    'pet.drag_photos_or_click': 'Drag photos here or click to select',
+    'pet.drop_photos_here': 'Drop photos here',
+    'pet.photo_requirements': 'JPEG, PNG, WebP up to 10MB each',
+    'pet.photos_remaining': '{count} photos remaining',
+    'pet.max_photos_reached': 'Maximum {max} photos allowed',
+    'pet.too_many_photos': 'Only {max} more photos allowed',
+    'pet.max_photos_reached_message':
+      'Maximum of {max} photos per visit reached.',
+    'pet.uploading_photos': 'Uploading photos...',
+    'pet.no_photos': 'No photos for this visit',
+    'pet.photos_count': '{count} photo',
+    'pet.photos_count_plural': '{count} photos',
+    'pet.delete_photo_confirm':
+      'Are you sure you want to delete this photo? This action cannot be undone.',
+    'pet.lightbox_controls': 'Use arrow keys to navigate, ESC to close',
+    download: 'Download',
+
+    are_you_sure: 'Are you sure?',
+    delete: 'Delete',
+    actions: 'Actions',
 
     // Pets
     'pets.title': 'Pets',
@@ -81,20 +131,6 @@ export const translations = {
     'pets.age': 'Age',
     'pets.owner': 'Owner',
     view: 'View',
-
-    // Calendar
-    'calendar.title': 'Calendar',
-    'calendar.connect': 'Connect Google Calendar',
-    'calendar.description':
-      'Sync your appointments from Google Calendar to see them here.',
-
-    // Settings
-    'settings.title': 'Settings',
-    'settings.language': 'Language',
-    'settings.notifications': 'Notifications',
-    'settings.notifications.enable': 'Enable Push Notifications',
-    'settings.notifications.description':
-      'Receive reminders for upcoming appointments.',
   },
   pl: {
     // General
@@ -144,6 +180,9 @@ export const translations = {
     'clients.pets': 'Zwierzęta',
     'clients.surname': 'Nazwisko',
     cancel: 'Anuluj',
+    'clients.delete': 'Usuń klienta',
+    'clients.delete_confirm_message':
+      'Czy na pewno chcesz usunąć tego klienta? Tej operacji nie można cofnąć.',
 
     // Client Details
     'client.details': 'Szczegóły klienta',
@@ -152,6 +191,7 @@ export const translations = {
     'client.add_pet': 'Dodaj zwierzaka',
     'client.add_pet_description': 'Wprowadź dane nowego zwierzaka.',
     'client.select_owner': 'Wybierz właściciela',
+    'client.delete': 'Usuń klienta',
 
     // Pet Profile
     'pet.profile': 'Profil zwierzaka',
@@ -165,6 +205,55 @@ export const translations = {
     'pet.price': 'Cena',
     'pet.edit_profile': 'Edytuj profil',
     'pet.type': 'Typ',
+    'pet.delete': 'Usuń zwierzaka',
+    'pet.delete_confirm_message':
+      'Czy na pewno chcesz usunąć to zwierzę? Tej operacji nie można cofnąć.',
+    'pet.no_owner': 'Brak właściciela',
+    'pet.add_visit': 'Dodaj wizytę',
+    'pet.add_visit_description':
+      'Dodaj nowy wpis do historii wizyt tego zwierzaka.',
+    'pet.visit_date': 'Data wizyty',
+    'pet.visit_notes': 'Notatki z wizyty',
+    'pet.visit_notes_placeholder':
+      'Wprowadź szczegóły wizyty (wykonane usługi, obserwacje, itp.)',
+    'pet.notes_char_limit': 'Maksymalnie 2000 znaków',
+    'pet.adding_visit': 'Dodawanie...',
+    'pet.no_visits': 'Brak zapisanych wizyt',
+    'pet.no_visits_description':
+      'Dodaj pierwszą wizytę, aby rozpocząć śledzenie historii pielęgnacji tego zwierzaka.',
+    'pet.visit_added_on': 'Dodano',
+    'pet.delete_visit_confirm':
+      'Czy na pewno chcesz usunąć tę wizytę? Tej operacji nie można cofnąć.',
+    'pet.loading_visits': 'Ładowanie wizyt...',
+
+    // Photos
+    'pet.add_photos': 'Dodaj zdjęcia',
+    'pet.add_photos_description': 'Dodaj zdjęcia dokumentujące tę wizytę.',
+    'pet.visit_created_successfully':
+      'Wizyta została utworzona! Możesz teraz dodać zdjęcia.',
+    'pet.finish_adding_photos': 'Zakończ',
+    'pet.drag_photos_or_click':
+      'Przeciągnij zdjęcia tutaj lub kliknij aby wybrać',
+    'pet.drop_photos_here': 'Upuść zdjęcia tutaj',
+    'pet.photo_requirements': 'JPEG, PNG, WebP do 10MB każde',
+    'pet.photos_remaining': 'Pozostało {count} zdjęć',
+    'pet.max_photos_reached': 'Maksymalnie {max} zdjęć dozwolone',
+    'pet.too_many_photos': 'Można dodać jeszcze tylko {max} zdjęć',
+    'pet.max_photos_reached_message':
+      'Osiągnięto maksymalną liczbę {max} zdjęć na wizytę.',
+    'pet.uploading_photos': 'Przesyłanie zdjęć...',
+    'pet.no_photos': 'Brak zdjęć z tej wizyty',
+    'pet.photos_count': '{count} zdjęcie',
+    'pet.photos_count_plural': '{count} zdjęć',
+    'pet.delete_photo_confirm':
+      'Czy na pewno chcesz usunąć to zdjęcie? Tej operacji nie można cofnąć.',
+    'pet.lightbox_controls': 'Użyj strzałek do nawigacji, ESC aby zamknąć',
+    download: 'Pobierz',
+
+    are_you_sure: 'Czy na pewno?',
+    delete: 'Usuń',
+    actions: 'Akcje',
+    pets: 'Zwierzęta',
 
     // Pets
     'pets.title': 'Zwierzęta',
@@ -174,22 +263,10 @@ export const translations = {
     'pets.age': 'Wiek',
     'pets.owner': 'Właściciel',
     view: 'Zobacz',
-
-    // Calendar
-    'calendar.title': 'Kalendarz',
-    'calendar.connect': 'Połącz z Kalendarzem Google',
-    'calendar.description':
-      'Zsynchronizuj swoje wizyty z Kalendarza Google, aby zobaczyć je tutaj.',
-
-    // Settings
-    'settings.title': 'Ustawienia',
-    'settings.language': 'Język',
-    'settings.notifications': 'Powiadomienia',
-    'settings.notifications.enable': 'Włącz powiadomienia push',
-    'settings.notifications.description':
-      'Otrzymuj przypomnienia o nadchodzących wizytach.',
   },
 };
+
+export type Translation = typeof translations.en;
 
 i18n.use(initReactI18next).init({
   resources: {

@@ -22,5 +22,5 @@ export default function PetPage() {
   const client = getClientById(clientId as string);
   const pet = client?.pets.find((p) => p.id === petId);
 
-  return <PetDetails pet={pet} />;
+  return <PetDetails pet={pet} ownerId={clientId as string} />;
 }

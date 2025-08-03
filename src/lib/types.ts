@@ -3,15 +3,25 @@ import type { Database } from '@/core/db/database.types';
 export type PetRow = Database['public']['Tables']['pets']['Row'];
 export type ClientRow = Database['public']['Tables']['clients']['Row'];
 
-export type Visit = {
-  id: string;
-  date: string;
-  services: string[];
-  notes: string;
-  price: number;
+export type VisitPhoto = {
+  path: string;
+  filename: string;
+  uploadedAt?: string;
 };
 
-export type Pet = PetRow;
+export type PetVisitRow = Database['public']['Tables']['pet_visits']['Row'];
+export type PetVisitInsert =
+  Database['public']['Tables']['pet_visits']['Insert'];
+export type PetVisitUpdate =
+  Database['public']['Tables']['pet_visits']['Update'];
+
+export type PetVisit = Omit<PetVisitRow, 'photos'> & {
+  photos: VisitPhoto[];
+};
+
+export type Pet = PetRow & {
+  visits?: PetVisit[];
+};
 
 export type Client = ClientRow & {
   pets: Pet[];

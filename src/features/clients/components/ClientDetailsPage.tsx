@@ -12,8 +12,8 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { notFound, useParams } from 'next/navigation';
-import { PlusCircle, Mail, Phone, PawPrint } from 'lucide-react';
+import { notFound, useParams, useRouter } from 'next/navigation';
+import { PlusCircle, Mail, Phone, PawPrint, Trash2 } from 'lucide-react';
 import { useLanguage } from '@/features/language/contexts/language-context';
 import { useClients } from '@/features/clients/contexts/client-context';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -29,12 +29,24 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import React from 'react';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '@/components/ui/alert-dialog';
 
 export function ClientDetailsPage() {
   const { clientId } = useParams();
-  const { getClientById, isLoading, addPet } = useClients();
+  const { getClientById, isLoading, addPet, deleteClient } = useClients();
   const { t } = useLanguage();
   const [isDialogOpen, setIsDialogOpen] = React.useState(false);
+  const router = useRouter();
 
   const [newPetName, setNewPetName] = React.useState('');
   const [newPetBreed, setNewPetBreed] = React.useState('');
@@ -59,6 +71,13 @@ export function ClientDetailsPage() {
     setNewPetBreed('');
     setNewPetAge('');
     setIsDialogOpen(false);
+  };
+
+  const handleDeleteClient = async () => {
+    if (client) {
+      await deleteClient(client.id);
+      router.push('/clients');
+    }
   };
 
   if (isLoading) {
@@ -108,7 +127,30 @@ export function ClientDetailsPage() {
 
   return (
     <>
-      <PageHeader title={client.name} />
+      <PageHeader title={client.name}>
+        <AlertDialog>
+          <AlertDialogTrigger asChild>
+            <Button variant="destructive">
+              <Trash2 className="mr-2 h-4 w-4" />
+              {t('client.delete')}
+            </Button>
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>{t('are_you_sure')}</AlertDialogTitle>
+              <AlertDialogDescription>
+                {t('client.delete_confirm_message')}
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>{t('cancel')}</AlertDialogCancel>
+              <AlertDialogAction onClick={handleDeleteClient}>
+                {t('delete')}
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+      </PageHeader>
 
       <div className="grid gap-6 md:grid-cols-2">
         <Card>

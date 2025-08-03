@@ -2,7 +2,8 @@
 
 import { PageHeader } from '@/components/page-header';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { upcomingAppointments } from '@/lib/placeholder-data';
+// TODO: Replace with real data from Supabase
+const upcomingAppointments: any[] = [];
 import { useLanguage } from '@/features/language/contexts/language-context';
 import type { UpcomingAppointment } from '@/lib/types';
 
