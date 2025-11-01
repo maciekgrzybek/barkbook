@@ -3,10 +3,8 @@ import type { NextRequest } from 'next/server';
 import { createServerClient } from '@supabase/ssr';
 
 export async function middleware(request: NextRequest) {
-  let response = NextResponse.next({
-    request: {
-      headers: request.headers,
-    },
+  let supabaseResponse = NextResponse.next({
+    request,
   });
 
   const supabase = createServerClient(
@@ -14,77 +12,94 @@ export async function middleware(request: NextRequest) {
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
       cookies: {
-        get(name: string) {
-          return request.cookies.get(name)?.value;
+        getAll() {
+          return request.cookies.getAll();
         },
-        set(name: string, value: string, options) {
-          request.cookies.set({ name, value, ...options });
-          response = NextResponse.next({
-            request: {
-              headers: request.headers,
-            },
+        setAll(cookiesToSet) {
+          cookiesToSet.forEach(({ name, value }) =>
+            request.cookies.set(name, value)
+          );
+          supabaseResponse = NextResponse.next({
+            request,
           });
-          response.cookies.set({ name, value, ...options });
-        },
-        remove(name: string, options) {
-          request.cookies.set({ name, value: '', ...options });
-          response = NextResponse.next({
-            request: {
-              headers: request.headers,
-            },
-          });
-          response.cookies.set({ name, value: '', ...options });
+          cookiesToSet.forEach(({ name, value, options }) =>
+            supabaseResponse.cookies.set(name, value, options)
+          );
         },
       },
     }
   );
 
+  // IMPORTANT: DO NOT REMOVE auth.getUser()
   const {
-    data: { session },
-  } = await supabase.auth.getSession();
+    data: { user },
+  } = await supabase.auth.getUser();
 
-  if (session) {
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
+  if (user) {
+    const { data: salon, error } = await supabase
+      .from('salons')
+      .select('id')
+      .eq('user_id', user.id)
+      .single();
 
-    if (user) {
-      const { data: salon, error } = await supabase
-        .from('salons')
-        .select('id')
-        .eq('user_id', user.id)
-        .single();
+    const hasSalon = salon !== null;
+    const isAtCreateSalon =
+      request.nextUrl.pathname.startsWith('/create-salon');
 
-      const hasSalon = salon !== null;
-      const isAtCreateSalon =
-        request.nextUrl.pathname.startsWith('/create-salon');
+    const isAtPublicPage = ['/login', '/register', '/auth/callback'].some(
+      (path) => request.nextUrl.pathname.startsWith(path)
+    );
 
-      const isAtPublicPage = ['/login', '/register', '/auth/callback'].some(
-        (path) => request.nextUrl.pathname.startsWith(path)
-      );
+    if (isAtPublicPage) {
+      const url = request.nextUrl.clone();
+      url.pathname = '/dashboard';
+      const redirectResponse = NextResponse.redirect(url);
+      // Copy cookies from supabaseResponse
+      supabaseResponse.cookies.getAll().forEach((cookie) => {
+        redirectResponse.cookies.set(cookie.name, cookie.value, cookie);
+      });
+      return redirectResponse;
+    }
 
-      if (isAtPublicPage) {
-        return NextResponse.redirect(new URL('/dashboard', request.url));
-      }
+    if (!hasSalon && !isAtCreateSalon) {
+      const url = request.nextUrl.clone();
+      url.pathname = '/create-salon';
+      const redirectResponse = NextResponse.redirect(url);
+      // Copy cookies from supabaseResponse
+      supabaseResponse.cookies.getAll().forEach((cookie) => {
+        redirectResponse.cookies.set(cookie.name, cookie.value, cookie);
+      });
+      return redirectResponse;
+    }
 
-      if (!hasSalon && !isAtCreateSalon) {
-        return NextResponse.redirect(new URL('/create-salon', request.url));
-      }
-
-      if (hasSalon && isAtCreateSalon) {
-        return NextResponse.redirect(new URL('/dashboard', request.url));
-      }
+    if (hasSalon && isAtCreateSalon) {
+      const url = request.nextUrl.clone();
+      url.pathname = '/dashboard';
+      const redirectResponse = NextResponse.redirect(url);
+      // Copy cookies from supabaseResponse
+      supabaseResponse.cookies.getAll().forEach((cookie) => {
+        redirectResponse.cookies.set(cookie.name, cookie.value, cookie);
+      });
+      return redirectResponse;
     }
   } else {
     const publicPaths = ['/login', '/register', '/auth/callback'];
     if (
       !publicPaths.some((path) => request.nextUrl.pathname.startsWith(path))
     ) {
-      return NextResponse.redirect(new URL('/login', request.url));
+      const url = request.nextUrl.clone();
+      url.pathname = '/login';
+      const redirectResponse = NextResponse.redirect(url);
+      // Copy cookies from supabaseResponse
+      supabaseResponse.cookies.getAll().forEach((cookie) => {
+        redirectResponse.cookies.set(cookie.name, cookie.value, cookie);
+      });
+      return redirectResponse;
     }
   }
 
-  return response;
+  // IMPORTANT: You *must* return the supabaseResponse object as it is.
+  return supabaseResponse;
 }
 
 export const config = {

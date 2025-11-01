@@ -49,9 +49,13 @@ export function RegisterPage() {
       const { data, error } = await supabase.auth.signUp({
         email: values.email,
         password: values.password,
+        options: {
+          emailRedirectTo: `${window.location.origin}/auth/callback`,
+        },
       });
 
       if (error) {
+        console.error('Registration error:', error);
         throw error;
       }
 
@@ -66,10 +70,13 @@ export function RegisterPage() {
         });
       }
     } catch (error: any) {
+      console.error('Registration failed:', error);
       toast({
         variant: 'destructive',
         title: 'Rejestracja nie powiodła się',
-        description: error.message || 'Wystąpił nieoczekiwany błąd.',
+        description:
+          error.message ||
+          `Wystąpił nieoczekiwany błąd: ${error.status || 'unknown'}`,
       });
     } finally {
       setIsLoading(false);
