@@ -22,7 +22,7 @@ Aplikacja BarkBook ma za zadanie rozwiązać te problemy, oferując proste i int
 | FR-01 | Zarządzanie bazą klientów         | Użytkownik (groomer) może dodawać, przeglądać, edytować i usuwać dane klientów. Wymagane pola: imię, nazwisko, numer telefonu. Opcjonalne: e-mail, adres.                                                                                            |
 | FR-02 | Zarządzanie profilami zwierzaków  | Użytkownik może dodawać, przeglądać, edytować i usuwać profile zwierzaków. Każdy zwierzak może być przypisany do jednego lub więcej klientów. Wymagane pola: imię, gatunek (np. pies, kot), rasa, wiek, stan zdrowia, alergie, preferencje, notatki. |
 | FR-03 | Historia wizyt zwierzaka          | Każdy profil zwierzaka zawiera ustrukturyzowaną listę poprzednich wizyt, zawierającą datę i pole na notatki z wizyty.                                                                                                                                |
-| FR-04 | Integracja kalendarza (`cal.com`) | Aplikacja osadza kalendarz `cal.com` za pomocą `iframe`. Groomer może ręcznie dodawać i przeglądać wizyty oraz blokować swoją dostępność.                                                                                                            |
+| FR-04 | Integracja kalendarza (`calendar_eventscal.com`) | Aplikacja osadza kalendarz `cal.com` za pomocą `iframe` oraz integruje się z API `cal.com`. Groomer może ręcznie dodawać i przeglądać wizyty, blokować swoją dostępność, a aplikacja może programistycznie zarządzać wizytami.                       |
 | FR-05 | Automatyczne powiadomienia SMS    | System automatycznie wysyła przypomnienia SMS do klientów przed wizytą. Czas wysłania (np. 24h przed) jest konfigurowalny przez groomera.                                                                                                            |
 | FR-06 | Wyszukiwanie                      | Aplikacja posiada prostą funkcję wyszukiwania, pozwalającą na znalezienie klienta lub zwierzaka po imieniu.                                                                                                                                          |
 | FR-07 | Dashboard (Ekran główny)          | Po uruchomieniu aplikacji wyświetlany jest dashboard z listą wizyt zaplanowanych na bieżący dzień.                                                                                                                                                   |
@@ -30,6 +30,9 @@ Aplikacja BarkBook ma za zadanie rozwiązać te problemy, oferując proste i int
 | FR-09 | Zgodność z RODO                   | Aplikacja umożliwia trwałe usunięcie danych klienta i jego zwierzaków oraz odnotowanie daty uzyskania zgody na przetwarzanie danych i komunikację.                                                                                                   |
 | FR-10 | Dostęp do aplikacji               | Aplikacja jest zabezpieczona przed nieautoryzowanym dostępem. Groomer musi się zalogować, aby uzyskać dostęp do danych.                                                                                                                              |
 | FR-11 | Tworzenie profilu salonu          | Po pierwszej rejestracji, użytkownik (groomer) musi utworzyć profil swojego salonu, podając jego nazwę. Jest to warunek konieczny do rozpoczęcia pracy z aplikacją.                                                                                  |
+| FR-12 | Integracja API kalendarza         | Aplikacja ma dostęp do API `cal.com` umożliwiający programistyczne tworzenie, modyfikowanie i usuwanie wizyt. System nasłuchuje webhooków z `cal.com` aby reagować na zmiany w kalendarzu.                                                           |
+| FR-13 | Zarządzanie długością wizyt       | Groomer może definiować czas trwania wizyty w zależności od rodzaju usługi, rasy i rozmiaru zwierzaka. System oferuje predefiniowane opcje czasowe oraz możliwość ustawienia niestandardowego czasu trwania.                                         |
+| FR-14 | Przechowywanie zdjęć z wizyt      | Aplikacja umożliwia dodawanie i przechowywanie zdjęć zwierzaków po wizytach. Zdjęcia są powiązane z konkretną wizytą i widoczne w historii wizyt zwierzaka.                                                                                          |
 
 ## 4. Granice produktu
 
@@ -38,7 +41,6 @@ Następujące funkcjonalności celowo NIE wchodzą w zakres wersji MVP:
 - Logowanie dla klientów końcowych.
 - Możliwość samodzielnej rezerwacji wizyt przez klientów.
 - Wykorzystanie modeli językowych (LLM) do jakichkolwiek celów.
-- Przechowywanie zdjęć zwierzaków lub zdjęć z wizyt.
 - Możliwość definiowania cennika i listy usług.
 - Integracja z systemami płatności.
 - Zaawansowane raportowanie i analityka.
@@ -158,6 +160,42 @@ Następujące funkcjonalności celowo NIE wchodzą w zakres wersji MVP:
   1.  Na profilu zwierzaka mogę dodać nowy wpis do jego historii wizyt.
   2.  Formularz wpisu pozwala na ustawienie daty wizyty i dodanie wieloliniowego opisu (notatek).
   3.  Nowa notatka jest widoczna w historii wizyt zwierzaka.
+
+---
+
+- ID: US-016
+- Tytuł: Programistyczne tworzenie wizyt przez aplikację
+- Opis: Jako groomer, chcę aby aplikacja mogła automatycznie tworzyć wizyty w kalendarzu na podstawie danych z systemu (np. po umówieniu wizyty dla klienta).
+- Kryteria akceptacji:
+  1.  Aplikacja posiada dostęp do API `cal.com` umożliwiający tworzenie wizyt.
+  2.  Po wybraniu klienta i zwierzaka, mogę zainicjować proces tworzenia wizyty bezpośrednio z aplikacji.
+  3.  Wizyta utworzona programistycznie jest automatycznie widoczna w kalendarzu `cal.com`.
+  4.  System automatycznie łączy utworzoną wizytę z danymi klienta i zwierzaka w BarkBook.
+  5.  W przypadku błędu API, aplikacja wyświetla czytelny komunikat o problemie.
+
+---
+
+- ID: US-017
+- Tytuł: Wybór długości trwania wizyty
+- Opis: Jako groomer, chcę móc określić czas trwania wizyty w zależności od rodzaju usługi, rasy i rozmiaru zwierzaka.
+- Kryteria akceptacji:
+  1.  Podczas tworzenia wizyty dostępny jest selektor czasu trwania.
+  2.  System oferuje predefiniowane opcje: 30 min, 45 min, 60 min, 90 min, 120 min.
+  3.  Dostępna jest opcja "Niestandardowy czas", pozwalająca na wpisanie dowolnej liczby minut.
+  4.  Na profilu zwierzaka mogę zapisać "domyślny czas wizyty", który będzie automatycznie sugerowany przy kolejnych rezerwacjach.
+  5.  Czas trwania jest przekazywany do kalendarza `cal.com` przy tworzeniu wizyty.
+
+---
+
+- ID: US-018
+- Tytuł: Reagowanie na zmiany w kalendarzu przez webhooks
+- Opis: Jako system, chcę automatycznie reagować na zmiany w kalendarzu `cal.com` (tworzenie, modyfikacja, usunięcie wizyt).
+- Kryteria akceptacji:
+  1.  Aplikacja nasłuchuje webhooków z `cal.com` o zmianach w kalendarzu.
+  2.  Gdy wizyta zostanie utworzona w `cal.com`, system próbuje automatycznie powiązać ją z klientem/zwierzakiem na podstawie opisu.
+  3.  Gdy wizyta zostanie usunięta w `cal.com`, system aktualizuje swój stan.
+  4.  Gdy wizyta zostanie przeniesiona w `cal.com`, system aktualizuje informacje o terminie.
+  5.  Wszystkie zmiany są logowane w systemie dla celów audytu.
 
 ---
 

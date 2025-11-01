@@ -3,7 +3,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Calendar, FileText, Plus, Trash2 } from 'lucide-react';
+import { Calendar, FileText, Plus, Trash2, Edit } from 'lucide-react';
 import { useLanguage } from '@/features/language/contexts/language-context';
 import { type PetVisit } from '@/lib/types';
 import { format } from 'date-fns';
@@ -21,7 +21,10 @@ import {
 } from '@/components/ui/alert-dialog';
 import { deletePetVisit } from '../actions/pet-visits';
 import { PhotoGallery } from './PhotoGallery';
+import { PhotoUpload } from './PhotoUpload';
+import { EditVisitDialog } from './EditVisitDialog';
 import { useState } from 'react';
+import { type VisitPhoto } from '@/lib/types';
 
 interface VisitHistoryProps {
   petId: string;
@@ -38,6 +41,10 @@ export function VisitHistory({
 }: VisitHistoryProps) {
   const { t } = useLanguage();
   const [deletingVisitId, setDeletingVisitId] = useState<string | null>(null);
+  const [editingVisit, setEditingVisit] = useState<PetVisit | null>(null);
+  const [uploadingForVisitId, setUploadingForVisitId] = useState<string | null>(
+    null
+  );
 
   const handleDeleteVisit = async (visitId: string) => {
     try {
@@ -54,6 +61,11 @@ export function VisitHistory({
 
   const handlePhotoDeleted = (photoPath: string) => {
     // Refresh visits to update photo count
+    onVisitsChange();
+  };
+
+  const handlePhotoUploaded = (photo: VisitPhoto) => {
+    // Refresh visits to show new photo
     onVisitsChange();
   };
 
@@ -104,60 +116,108 @@ export function VisitHistory({
                       {formatVisitDate(visit.visit_date)}
                     </Badge>
                   </div>
-                  <AlertDialog>
-                    <AlertDialogTrigger asChild>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        disabled={deletingVisitId === visit.id}
-                        className="text-destructive hover:text-destructive hover:bg-destructive/10"
-                      >
-                        <Trash2 className="h-4 w-4" />
-                      </Button>
-                    </AlertDialogTrigger>
-                    <AlertDialogContent>
-                      <AlertDialogHeader>
-                        <AlertDialogTitle>{t('are_you_sure')}</AlertDialogTitle>
-                        <AlertDialogDescription>
-                          {t('pet.delete_visit_confirm')}
-                        </AlertDialogDescription>
-                      </AlertDialogHeader>
-                      <AlertDialogFooter>
-                        <AlertDialogCancel>{t('cancel')}</AlertDialogCancel>
-                        <AlertDialogAction
-                          onClick={() => handleDeleteVisit(visit.id)}
-                          className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                  <div className="flex items-center gap-1">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => setEditingVisit(visit)}
+                      className="hover:bg-accent"
+                    >
+                      <Edit className="h-4 w-4" />
+                    </Button>
+                    <AlertDialog>
+                      <AlertDialogTrigger asChild>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          disabled={deletingVisitId === visit.id}
+                          className="text-destructive hover:text-destructive hover:bg-destructive/10"
                         >
-                          {t('delete')}
-                        </AlertDialogAction>
-                      </AlertDialogFooter>
-                    </AlertDialogContent>
-                  </AlertDialog>
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                      </AlertDialogTrigger>
+                      <AlertDialogContent>
+                        <AlertDialogHeader>
+                          <AlertDialogTitle>
+                            {t('are_you_sure')}
+                          </AlertDialogTitle>
+                          <AlertDialogDescription>
+                            {t('pet.delete_visit_confirm')}
+                          </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter>
+                          <AlertDialogCancel>{t('cancel')}</AlertDialogCancel>
+                          <AlertDialogAction
+                            onClick={() => handleDeleteVisit(visit.id)}
+                            className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                          >
+                            {t('delete')}
+                          </AlertDialogAction>
+                        </AlertDialogFooter>
+                      </AlertDialogContent>
+                    </AlertDialog>
+                  </div>
                 </div>
 
-                                <div className="prose prose-sm max-w-none">
+                <div className="prose prose-sm max-w-none">
                   <div className="text-sm text-muted-foreground whitespace-pre-wrap">
                     {visit.notes}
                   </div>
                 </div>
 
-                {/* Photos Gallery */}
-                {visit.photos && visit.photos.length > 0 && (
-                  <div className="mt-4">
-                    <div className="text-sm font-medium mb-2 flex items-center gap-2">
-                      <Badge variant="secondary">
-                        {t('pet.photos_count', { count: visit.photos.length })}
-                      </Badge>
+                {/* Photos Section */}
+                <div className="mt-4 space-y-3">
+                  {/* Photos Header with Add Button */}
+                  <div className="flex items-center justify-between">
+                    <div className="text-sm font-medium flex items-center gap-2">
+                      {visit.photos && visit.photos.length > 0 ? (
+                        <Badge variant="secondary">
+                          {t('pet.photos_count', {
+                            count: visit.photos.length,
+                          })}
+                        </Badge>
+                      ) : (
+                        <span className="text-muted-foreground">
+                          {t('pet.no_photos')}
+                        </span>
+                      )}
                     </div>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() =>
+                        setUploadingForVisitId(
+                          uploadingForVisitId === visit.id ? null : visit.id
+                        )
+                      }
+                      className="flex items-center gap-2"
+                    >
+                      <Plus className="h-3 w-3" />
+                      {t('pet.add_photos')}
+                    </Button>
+                  </div>
+
+                  {/* Photo Upload Area */}
+                  {uploadingForVisitId === visit.id && (
+                    <PhotoUpload
+                      visitId={visit.id}
+                      petId={petId}
+                      onPhotoUploaded={handlePhotoUploaded}
+                      currentPhotosCount={visit.photos?.length || 0}
+                    />
+                  )}
+
+                  {/* Photos Gallery */}
+                  {visit.photos && visit.photos.length > 0 && (
                     <PhotoGallery
                       photos={visit.photos}
                       visitId={visit.id}
                       onPhotoDeleted={handlePhotoDeleted}
                       canDelete={true}
                     />
-                  </div>
-                )}
-                
+                  )}
+                </div>
+
                 <div className="text-xs text-muted-foreground pt-2 border-t">
                   {t('pet.visit_added_on')}: {formatVisitDate(visit.created_at)}
                 </div>
@@ -166,6 +226,16 @@ export function VisitHistory({
           </div>
         )}
       </CardContent>
+
+      {/* Edit Visit Dialog */}
+      {editingVisit && (
+        <EditVisitDialog
+          visit={editingVisit}
+          isOpen={!!editingVisit}
+          onClose={() => setEditingVisit(null)}
+          onVisitUpdated={onVisitsChange}
+        />
+      )}
     </Card>
   );
 }

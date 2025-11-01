@@ -1,28 +1,36 @@
 ---
-description: 
-globs: 
+description: When writing new unit tests or updating exisiting ones
 alwaysApply: false
 ---
+
 ---
+
 description:
 globs:
 alwaysApply: false
+
 ---
+
 ---
+
 description: Frontend unit tests - These rules guide the generation of unit and integration tests following BDD principles with a specific fixture-based pattern.
 alwaysApply: false
+
 ---
 
 ## Core Patterns
 
 ### 1. Test Structure
+
 - Always use a `getFixtures()` function to encapsulate test setup
 - Place `getFixtures()` at the bottom of the test file
 - Initialize fixtures in `beforeEach()` with `fixtures = getFixtures()`
 - Call `jest.clearAllMocks()` in `beforeEach()`
 
 ### 2. Fixture Design
+
 The `getFixtures()` function should return an object with:
+
 - **Setup methods**: Methods that configure the test environment (e.g., `show()`, `setup()`)
 - **Given methods**: Object containing methods to set test preconditions (BDD given)
 - **Then methods**: Object containing assertion helpers (BDD then)
@@ -30,25 +38,35 @@ The `getFixtures()` function should return an object with:
 ```typescript
 function getFixtures() {
   return {
-    show: () => { /* render component */ },
-    setup: (config) => { /* setup hook/complex component */ },
+    show: () => {
+      /* render component */
+    },
+    setup: (config) => {
+      /* setup hook/complex component */
+    },
     given: {
-      methodName: (value) => { /* set precondition */ }
+      methodName: (value) => {
+        /* set precondition */
+      },
     },
     then: {
-      assertionMethod: (actual, expected) => { /* custom assertion */ }
-    }
+      assertionMethod: (actual, expected) => {
+        /* custom assertion */
+      },
+    },
   };
 }
 ```
 
 ### 3. API Mocking
+
 - Always import `apiMock` from `'spec-utils/apiMock'`
 - Use `apiMock.onGet()`, `apiMock.onPost()`, etc. for mocking HTTP requests
 - Place API mocks inside `given` methods in fixtures
 - Mock API responses with builder pattern when available (e.g., `MockOrganizationAccountBuilder`)
 
 ### 4. Test Descriptions
+
 - **NEVER** use the word "should" in test descriptions
 - Use present tense, descriptive language
 - Good: `"renders the price"`, `"returns the funding_status column"`
@@ -57,7 +75,9 @@ function getFixtures() {
 - Use `test()` or `it()` for individual test cases
 
 ### 5. Component Testing
+
 For React components:
+
 - Use `renderWith()` utility function
 - Wrap with appropriate providers using `withQueryClient()`, `withReduxStore()`
 - Create Redux store with `createReduxStoreWithInitialState()`
@@ -66,39 +86,51 @@ For React components:
 - Use `queryBy*` for elements that may not exist
 
 ### 6. Hook Testing
+
 For custom hooks:
+
 - Use `renderHook()` from `@testing-library/react-hooks`
 - Use `withWrappers()` to combine multiple wrapper providers
 - Access hook result via `result.current`
 
 ### 7. BDD Language
+
 - Structure tests using BDD terminology:
   - **Given**: Use `fixtures.given.methodName()` to set up preconditions
   - **When**: Use `fixtures.show()` or `fixtures.setup()` to trigger the action
   - **Then**: Use assertions or `fixtures.then.methodName()` for verification
 
 ### 8. Assertion Patterns
+
 - Use Jest matchers: `toBeInTheDocument()`, `not.toBeInTheDocument()`
 - For array assertions, use `expect.arrayContaining()` and `expect.objectContaining()`
 - Create custom assertion methods in `fixtures.then` for complex validations
 - Group related assertions together
 
 ### 9. Test Organization
+
 - Group tests by feature using nested `describe()` blocks
 - Use descriptive `describe()` block names that explain the context
 - Order tests from simple to complex scenarios
 - Test both positive and negative cases
 
 ### 10. Common Imports
+
 Always include these standard imports:
+
 ```typescript
 import React from 'react';
 import { screen } from '@testing-library/react';
 import apiMock from 'spec-utils/apiMock';
-import { createReduxStoreWithInitialState, renderWith, withQueryClient } from '@/test-utils';
+import {
+  createReduxStoreWithInitialState,
+  renderWith,
+  withQueryClient,
+} from '@/test-utils';
 ```
 
 ### 11. Repetable testst
+
 When you believe is valid, use test.each`` approach. It's not valid to use it when you have to use if/else statements inside of the body of test.
 
 ```
@@ -113,6 +145,7 @@ ${'something_else'} | ${'resulting_else'}
   expect(result).toEqual(expectedResult);
 })
 ```
+
 ```
 // Bad example - do not use test.each
 
@@ -130,6 +163,7 @@ ${'something_else'} | ${'resulting_else'}
   }
 })
 ```
+
 ## Example Template
 
 ```typescript
@@ -159,13 +193,14 @@ function getFixtures() {
     given: {
       someCondition: (value) => {
         // Setup precondition
-      }
-    }
+      },
+    },
   };
 }
 ```
 
 ## Anti-Patterns to Avoid
+
 - Don't use "should" in test descriptions
 - Don't place setup logic directly in test cases
 - Don't repeat API mocking across multiple tests
@@ -175,20 +210,21 @@ function getFixtures() {
 - Don't add comments saying given/when/then, this should be obvious from the test code
 
 ## Best Practices
+
 - Keep fixture methods focused and single-purpose, but use arguments or params when needed, example:
-<good_example>
-userIs: (role: 'admin' | 'non-admin') => {
+  <good_example>
+  userIs: (role: 'admin' | 'non-admin') => {
   isAdminUser = role === 'admin';
-},
-</good_example>
-<bad_example>
-isAdmin: () => {
+  },
+  </good_example>
+  <bad_example>
+  isAdmin: () => {
   isAdminUser = true;
-},
-isNotAdmin: () => {
+  },
+  isNotAdmin: () => {
   isAdminUser = false;
-},
-</bad_example>
+  },
+  </bad_example>
 - Use meaningful parameter names in fixture methods
 - Prefer async/await over promises
 - Use consistent naming conventions across fixture methods

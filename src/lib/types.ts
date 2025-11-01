@@ -27,6 +27,9 @@ export type Client = ClientRow & {
   pets: Pet[];
 };
 
+export type CalendarEventRow =
+  Database['public']['Tables']['calendar_events']['Row'];
+
 export type UpcomingAppointment = {
   time: string;
   clientName: string;

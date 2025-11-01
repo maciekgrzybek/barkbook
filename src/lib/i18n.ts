@@ -95,6 +95,10 @@ export const translations = {
     'pet.delete_visit_confirm':
       'Are you sure you want to delete this visit? This action cannot be undone.',
     'pet.loading_visits': 'Loading visits...',
+    'pet.edit_visit': 'Edit Visit',
+    'pet.edit_visit_description': 'Update the visit date and notes as needed.',
+    'pet.notes_required': 'Notes are required',
+    'pet.error_updating_visit': 'Failed to update visit. Please try again.',
 
     // Photos
     'pet.add_photos': 'Add Photos',
@@ -122,6 +126,8 @@ export const translations = {
     are_you_sure: 'Are you sure?',
     delete: 'Delete',
     actions: 'Actions',
+    saving: 'Saving...',
+    save_changes: 'Save Changes',
 
     // Pets
     'pets.title': 'Pets',
