@@ -71,7 +71,7 @@ export function CreateSalonPage() {
               <FormItem>
                 <FormLabel>Nazwa salonu</FormLabel>
                 <FormControl>
-                  <Input placeholder="np. BarkBook Grooming" {...field} />
+                  <Input placeholder="np. Groomio" {...field} />
                 </FormControl>
                 <FormDescription>To jest nazwa Twojego salonu.</FormDescription>
                 <FormMessage />

@@ -4,7 +4,7 @@ import { initReactI18next } from 'react-i18next';
 export const translations = {
   en: {
     // General
-    appName: 'SalonMinder',
+    appName: 'Groomio',
     save: 'Save',
     add: 'Add',
     edit: 'Edit',
@@ -24,7 +24,7 @@ export const translations = {
     'login.no_account': "Don't have an account?",
     'login.register': 'Register',
     'register.title': 'Create your account',
-    'register.subtitle': 'Get started with SalonMinder',
+    'register.subtitle': 'Get started with Groomio',
     'register.button': 'Create Account',
     'register.has_account': 'Already have an account?',
     'register.login': 'Log In',
@@ -140,7 +140,7 @@ export const translations = {
   },
   pl: {
     // General
-    appName: 'SalonMinder',
+    appName: 'Groomio',
     save: 'Zapisz',
     add: 'Dodaj',
     edit: 'Edytuj',
@@ -159,7 +159,7 @@ export const translations = {
     'login.no_account': 'Nie masz konta?',
     'login.register': 'Zarejestruj się',
     'register.title': 'Utwórz swoje konto',
-    'register.subtitle': 'Rozpocznij pracę z SalonMinder',
+    'register.subtitle': 'Rozpocznij pracę z Groomio',
     'register.button': 'Utwórz konto',
     'register.has_account': 'Masz już konto?',
     'register.login': 'Zaloguj się',

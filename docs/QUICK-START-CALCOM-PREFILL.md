@@ -14,7 +14,7 @@
 
 ```bash
 # Apply the migration to add cal_com_username field
-cd /Users/maciejgrzybek/Projects/barkbook
+cd /Users/maciejgrzybek/Projects/groomio
 supabase db push
 ```
 
@@ -221,7 +221,7 @@ For detailed information, see:
 
 ## ✨ Pro Tips
 
-1. **Add emails to clients** - Prevents generated emails like `123456789@temp.barkbook.app`
+1. **Add emails to clients** - Prevents generated emails like `123456789@temp.groomio.app`
 2. **Use consistent event type slugs** - Makes it easier to manage
 3. **Set default pet duration** - Add `default_visit_duration_minutes` to pets table
 4. **Enable booking confirmations** - In Cal.com settings for automatic emails

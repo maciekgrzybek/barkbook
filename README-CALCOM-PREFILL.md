@@ -9,7 +9,7 @@ Your BarkBook app now has a **fully functional Cal.com booking system** that aut
 ### Step 1: Run the Migration
 
 ```bash
-cd /Users/maciejgrzybek/Projects/barkbook
+cd /Users/maciejgrzybek/Projects/groomio
 supabase db push
 ```
 
@@ -208,7 +208,7 @@ After basic setup works, you can:
 
 ## 💡 Pro Tips
 
-1. **Add client emails** to avoid generated `@temp.barkbook.app` emails
+1. **Add client emails** to avoid generated `@temp.groomio.app` emails
 2. **Use consistent slugs** for event types (e.g., `quick-trim`, `standard-grooming`)
 3. **Enable buffer times** in Cal.com for prep between appointments
 4. **Set minimum notice** to prevent last-minute bookings

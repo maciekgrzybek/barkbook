@@ -40,8 +40,8 @@ export interface CalComWebhookPayload {
     uid: string;
     bookingId?: number;
     metadata?: {
-      barkbookClientId?: string;
-      barkbookPetId?: string;
+      groomioClientId?: string;
+      groomioPetId?: string;
       source?: string;
       [key: string]: any;
     };
@@ -132,10 +132,10 @@ export class CalComWebhookProcessor {
         };
       }
 
-      // Extract BarkBook metadata
+      // Extract Groomio metadata
       const metadata = booking.metadata || {};
-      const clientId = metadata.barkbookClientId || null;
-      const petId = metadata.barkbookPetId || null;
+      const clientId = metadata.groomioClientId || null;
+      const petId = metadata.groomioPetId || null;
 
       // Get salon_id from client or pet relationship
       let salonId = null;

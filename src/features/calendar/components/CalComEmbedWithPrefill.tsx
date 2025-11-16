@@ -25,7 +25,7 @@ export function CalComEmbedWithPrefill({
   useEffect(() => {
     (async function () {
       const cal = await getCalApi();
-      
+
       // Configure Cal.com UI
       cal('ui', {
         styles: { branding: { brandColor: '#000000' } },
@@ -69,14 +69,16 @@ ${pet.notes ? `Uwagi: ${pet.notes}` : ''}
       config={{
         // Prefill client contact information
         name: `${client.name} ${client.surname}`,
-        email: client.email || `${client.phone_number.replace(/\s/g, '')}@temp.barkbook.app`,
+        email:
+          client.email ||
+          `${client.phone_number.replace(/\s/g, '')}@temp.groomio.app`,
         phone: client.phone_number,
         notes: bookingNotes,
 
-        // Store BarkBook IDs in metadata for webhook processing
-        'metadata[barkbookClientId]': client.id,
-        'metadata[barkbookPetId]': pet.id,
-        'metadata[source]': 'barkbook',
+        // Store groomio IDs in metadata for webhook processing
+        'metadata[groomioClientId]': client.id,
+        'metadata[groomioPetId]': pet.id,
+        'metadata[source]': 'groomio',
 
         // Custom booking questions (must be configured in Cal.com first)
         petName: pet.name,
@@ -95,4 +97,3 @@ ${pet.notes ? `Uwagi: ${pet.notes}` : ''}
     />
   );
 }
-

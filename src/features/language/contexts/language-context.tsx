@@ -23,7 +23,7 @@ const LanguageContext = createContext<LanguageContextType | undefined>(
 );
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
-  const [language, setLanguageState] = useState<Language>('en');
+  const [language, setLanguageState] = useState<Language>('pl');
   const { t, i18n: i18nInstance } = useTranslation();
 
   useEffect(() => {

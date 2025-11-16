@@ -236,7 +236,7 @@ When a groomer selects a client and pet, the following data is automatically pre
 | Email    | `client.email` or generated    | "[email protected]"                    |
 | Phone    | `client.phone_number`          | "+48 123 456 789"                      |
 | Notes    | Pet details                    | "Zwierzak: Burek\nRasa: Labrador\n..." |
-| Metadata | BarkBook IDs                   | `{ barkbookClientId: "uuid", ... }`    |
+| Metadata | BarkBook IDs                   | `{ groomioClientId: "uuid", ... }`     |
 | Location | `client.address`               | "ul. Główna 1, Warszawa"               |
 
 ### Notes Field Content
@@ -262,9 +262,9 @@ The booking metadata includes BarkBook IDs for webhook processing:
 ```json
 {
   "metadata": {
-    "barkbookClientId": "client-uuid",
-    "barkbookPetId": "pet-uuid",
-    "source": "barkbook"
+    "groomioClientId": "client-uuid",
+    "groomioPetId": "pet-uuid",
+    "source": "groomio"
   }
 }
 ```
@@ -315,7 +315,7 @@ The interface is fully responsive:
 2. Check event type slug matches your Cal.com configuration
 3. Ensure event type is not hidden
 
-### Email field shows "@temp.barkbook.app"
+### Email field shows "@temp.groomio.app"
 
 **Problem**: Client doesn't have an email in database
 

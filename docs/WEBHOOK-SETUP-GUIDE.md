@@ -110,9 +110,9 @@ Successful webhooks show:
       }
     ],
     "metadata": {
-      "barkbookClientId": "client-uuid",
-      "barkbookPetId": "pet-uuid",
-      "source": "barkbook"
+      "groomioClientId": "client-uuid",
+      "groomioPetId": "pet-uuid",
+      "source": "groomio"
     }
   }
 }
@@ -154,7 +154,7 @@ Successful webhooks show:
                    ▼
 ┌─────────────────────────────────────────────────────────────┐
 │  Cal.com receives booking                                   │
-│  Stores: uid, time, metadata (barkbookClientId, petId)     │
+│  Stores: uid, time, metadata (groomioClientId, petId)     │
 └──────────────────┬──────────────────────────────────────────┘
                    │
                    ▼ (webhook triggered)
@@ -277,8 +277,8 @@ CREATE TABLE webhook_logs (
 - Verify metadata in Cal.com booking:
   ```javascript
   {
-    "metadata[barkbookClientId]": "uuid",
-    "metadata[barkbookPetId]": "uuid"
+    "metadata[groomioClientId]": "uuid",
+    "metadata[groomioPetId]": "uuid"
   }
   ```
 

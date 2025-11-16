@@ -76,7 +76,7 @@ src/core/db/database.types.ts  ← Added cal_com_username to salons
 ### 1. Run Migration
 
 ```bash
-cd /Users/maciejgrzybek/Projects/barkbook
+cd /Users/maciejgrzybek/Projects/groomio
 supabase db push
 ```
 
@@ -197,9 +197,9 @@ interface Pet {
 ```json
 {
   "metadata": {
-    "barkbookClientId": "uuid",
-    "barkbookPetId": "uuid",
-    "source": "barkbook"
+    "groomioClientId": "uuid",
+    "groomioPetId": "uuid",
+    "source": "groomio"
   }
 }
 ```

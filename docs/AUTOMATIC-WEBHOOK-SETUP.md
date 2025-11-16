@@ -22,7 +22,7 @@ When a new user connects their Cal.com account, BarkBook can **automatically cre
 ┌─────────────────────────────────────────────────────────────┐
 │  3. BarkBook Automatically Creates Webhook                  │
 │     - Calls Cal.com API: POST /v1/webhooks                 │
-│     - URL: https://barkbook.app/api/webhooks/calcom        │
+│     - URL: https://groomio.app/api/webhooks/calcom        │
 │     - Events: CREATED, RESCHEDULED, CANCELLED, ENDED       │
 └──────────────────┬──────────────────────────────────────────┘
                    │
@@ -207,7 +207,7 @@ Authorization: Bearer {access_token}
 Content-Type: application/json
 
 {
-  "subscriberUrl": "https://barkbook.app/api/webhooks/calcom",
+  "subscriberUrl": "https://groomio.app/api/webhooks/calcom",
   "eventTriggers": [
     "BOOKING_CREATED",
     "BOOKING_RESCHEDULED",
@@ -238,7 +238,7 @@ Add to `.env.local`:
 
 ```bash
 # Your production URL (used for webhook setup)
-NEXT_PUBLIC_APP_URL=https://barkbook.app
+NEXT_PUBLIC_APP_URL=https://groomio.app
 
 # For localhost testing with ngrok
 # NEXT_PUBLIC_APP_URL=https://abc123.ngrok.io
@@ -319,7 +319,7 @@ if (salon.webhook_setup_pending) {
 1. Deploy to Vercel/production
 2. Set environment variable:
    ```bash
-   NEXT_PUBLIC_APP_URL=https://barkbook.app
+   NEXT_PUBLIC_APP_URL=https://groomio.app
    ```
 3. Test with new user signup
 
@@ -373,7 +373,7 @@ Update OAuth scopes in Cal.com app settings.
 2. Verify URL is accessible:
 
    ```bash
-   curl https://barkbook.app/api/webhooks/calcom
+   curl https://groomio.app/api/webhooks/calcom
    ```
 
 3. Check webhook logs in Cal.com dashboard

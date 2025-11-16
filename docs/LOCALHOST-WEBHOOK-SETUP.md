@@ -149,7 +149,7 @@ ngrok http 9002
 Once deployed to production (Vercel, etc.), use your real domain:
 
 ```
-https://barkbook.app/api/webhooks/calcom
+https://groomio.app/api/webhooks/calcom
 ```
 
 No tunneling needed! 🎉

@@ -21,12 +21,12 @@ export function MainNav({
   const { t } = useLanguage();
 
   const routes = [
-    {
-      href: '/dashboard',
-      label: t('dashboard'),
-      icon: LayoutDashboard,
-      active: pathname === '/dashboard',
-    },
+    // {
+    //   href: '/dashboard',
+    //   label: t('dashboard'),
+    //   icon: LayoutDashboard,
+    //   active: pathname === '/dashboard',
+    // },
     {
       href: '/clients',
       label: t('clients'),
@@ -45,12 +45,12 @@ export function MainNav({
       icon: PawPrint,
       active: pathname.startsWith('/pets'),
     },
-    {
-      href: '/settings',
-      label: t('settings'),
-      icon: Settings,
-      active: pathname === '/settings',
-    },
+    // {
+    //   href: '/settings',
+    //   label: t('settings'),
+    //   icon: Settings,
+    //   active: pathname === '/settings',
+    // },
   ];
 
   return (

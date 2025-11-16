@@ -12,7 +12,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'BarkBook',
+  title: 'Groomio',
   description: 'Manage your pet grooming salon with ease.',
 };
 

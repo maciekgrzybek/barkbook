@@ -22,7 +22,7 @@ You now have **full bidirectional sync** between Cal.com and BarkBook! 🎉
 
 3. **Smart Linking** ✅
 
-   - Extracts `barkbookClientId` and `barkbookPetId` from metadata
+   - Extracts `groomioClientId` and `groomioPetId` from metadata
    - Automatically links events to clients and pets
    - Gets salon_id from client/pet relationships
 
@@ -80,7 +80,7 @@ src/features/calendar/components/
 │     - Selects pet (e.g., Burek)                                 │
 │     - Client auto-selected (Jan Kowalski)                       │
 │     - All data prefilled in Cal.com form                        │
-│     - Metadata sent: { barkbookClientId, barkbookPetId }        │
+│     - Metadata sent: { groomioClientId, groomioPetId }        │
 └──────────────────┬──────────────────────────────────────────────┘
                    │
                    ▼
@@ -275,18 +275,18 @@ for (const appt of appointments) {
 
 ## What Gets Synced
 
-| Cal.com Field             | BarkBook Field   | Source   |
-| ------------------------- | ---------------- | -------- |
-| uid                       | cal_com_event_id | Cal.com  |
-| title                     | title            | Cal.com  |
-| description               | description      | Cal.com  |
-| startTime                 | start_time       | Cal.com  |
-| endTime                   | end_time         | Cal.com  |
-| metadata.barkbookClientId | client_id        | BarkBook |
-| metadata.barkbookPetId    | pet_id           | BarkBook |
-| attendees[0].email        | attendee_email   | Cal.com  |
-| smsReminderNumber         | attendee_phone   | Cal.com  |
-| status                    | status           | Cal.com  |
+| Cal.com Field            | BarkBook Field   | Source   |
+| ------------------------ | ---------------- | -------- |
+| uid                      | cal_com_event_id | Cal.com  |
+| title                    | title            | Cal.com  |
+| description              | description      | Cal.com  |
+| startTime                | start_time       | Cal.com  |
+| endTime                  | end_time         | Cal.com  |
+| metadata.groomioClientId | client_id        | BarkBook |
+| metadata.groomioPetId    | pet_id           | BarkBook |
+| attendees[0].email       | attendee_email   | Cal.com  |
+| smsReminderNumber        | attendee_phone   | Cal.com  |
+| status                   | status           | Cal.com  |
 
 ## Benefits
 
@@ -388,7 +388,7 @@ LIMIT 10;
 **Solution**: Ensure metadata is sent:
 
 - Check `CalComEmbedWithPrefill` component
-- Verify `'metadata[barkbookPetId]': pet.id` is in config
+- Verify `'metadata[groomioPetId]': pet.id` is in config
 
 ### Duplicate Events
 
