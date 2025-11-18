@@ -110,7 +110,10 @@ export function CalendarPage() {
           </TabsList>
 
           <TabsContent value="book">
-            <BookingWithPrefill calComUsername={calComUsername} />
+            <BookingWithPrefill
+              calComUsername={calComUsername}
+              eventTypeSlug={'wizyta'}
+            />
           </TabsContent>
 
           <TabsContent value="view">
